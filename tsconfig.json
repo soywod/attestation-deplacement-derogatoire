@@ -1,0 +1,18 @@
+{
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"],
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react-native",
+    "lib": ["es6"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "esnext"
+  }
+}
