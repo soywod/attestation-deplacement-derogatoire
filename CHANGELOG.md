@@ -7,4 +7,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-[unreleased]: https://github.com/soywod/attestation-covid-19
+[unreleased]: https://github.com/soywod/attestation-deplacement-derogatoire

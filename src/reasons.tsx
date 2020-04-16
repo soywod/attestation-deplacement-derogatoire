@@ -154,7 +154,7 @@ const Reason: FC<ReasonProps> = props => {
 }
 
 ReasonsScreen.navigationOptions = props => ({
-  title: "Motif(s) de sortie",
+  title: "Motif(s)",
   headerRight: () => (
     <TouchableOpacity
       activeOpacity={0.5}

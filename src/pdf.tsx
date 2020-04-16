@@ -211,7 +211,7 @@ async function download(data: string) {
 }
 
 async function downloadIOS(data: string) {
-  const path = RNFS.DocumentDirectoryPath + "/attestation-covid-19.pdf"
+  const path = RNFS.DocumentDirectoryPath + "/attestation-deplacement-derogatoire.pdf"
   await RNFS.writeFile(path, data, "base64")
   return path
 }
@@ -223,7 +223,7 @@ async function downloadAndroid(data: string) {
     )
 
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      const path = RNFS.DownloadDirectoryPath + "/attestation-covid-19.pdf"
+      const path = RNFS.DownloadDirectoryPath + "/attestation-deplacement-derogatoire.pdf"
       await RNFS.writeFile(path, data, "base64")
       ToastAndroid.show("Attestation téléchargée dans le dossier Download.", ToastAndroid.SHORT)
       return path

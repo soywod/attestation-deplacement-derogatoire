@@ -1,8 +1,8 @@
 # Générateur d'attestation de déplacement dérogatoire
 
-<img src="https://raw.githubusercontent.com/soywod/attestation-covid-19/master/android/app/src/main/res/ic_launcher.png" width="256" height="256" />
+<img src="https://raw.githubusercontent.com/soywod/attestation-deplacement-derogatoire/master/android/app/src/main/res/ic_launcher.png" width="256" height="256" />
 
-Application mobile de génération de l'attestation de déplacement dérogatoire à présenter dans le cadre du confinement lié au virus COVID-19.
+Application mobile de génération d'attestation de déplacement dérogatoire.
 
 ## Développement
 
@@ -10,8 +10,8 @@ L'application mobile est développée sous [React
 Native](https://reactnative.dev/).
 
 ```bash
-git clone https://github.com/soywod/attestation-covid-19.git
-cd attestation-covid-19
+git clone https://github.com/soywod/attestation-deplacement-derogatoire.git
+cd attestation-deplacement-derogatoire
 yarn install
 ```
 

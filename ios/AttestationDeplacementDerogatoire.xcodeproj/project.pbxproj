@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* AttestationCovid19Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AttestationCovid19Tests.m */; };
+		00E356F31AD99517003FC87E /* AttestationDeplacementDerogatoireTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AttestationDeplacementDerogatoireTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -15,12 +15,12 @@
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2DCD954D1E0B4F2C00145EB5 /* AttestationCovid19Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AttestationCovid19Tests.m */; };
-		4B227B6298B3011E17DCA5BF /* libPods-AttestationCovid19-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D1AC35BABA24E4BE91BE7D /* libPods-AttestationCovid19-tvOS.a */; };
+		2DCD954D1E0B4F2C00145EB5 /* AttestationDeplacementDerogatoireTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AttestationDeplacementDerogatoireTests.m */; };
+		4B227B6298B3011E17DCA5BF /* libPods-AttestationDeplacementDerogatoire-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D1AC35BABA24E4BE91BE7D /* libPods-AttestationDeplacementDerogatoire-tvOS.a */; };
 		5E491C802444836E008ACD1F /* template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5E491C7F2444836E008ACD1F /* template.pdf */; };
-		66AC7762805B7EA5C9DD2EC6 /* libPods-AttestationCovid19-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F777276AC7535068E98BCB /* libPods-AttestationCovid19-tvOSTests.a */; };
-		83F2DB1DFCF99DEE2A8472AD /* libPods-AttestationCovid19-AttestationCovid19Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 880B8D25F67A18A9C3D1B538 /* libPods-AttestationCovid19-AttestationCovid19Tests.a */; };
-		8CC39EF97A419DB9BBF39E9A /* libPods-AttestationCovid19.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E28CBD35C24DC7D3FD0FC71 /* libPods-AttestationCovid19.a */; };
+		66AC7762805B7EA5C9DD2EC6 /* libPods-AttestationDeplacementDerogatoire-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F777276AC7535068E98BCB /* libPods-AttestationDeplacementDerogatoire-tvOSTests.a */; };
+		83F2DB1DFCF99DEE2A8472AD /* libPods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 880B8D25F67A18A9C3D1B538 /* libPods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.a */; };
+		8CC39EF97A419DB9BBF39E9A /* libPods-AttestationDeplacementDerogatoire.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E28CBD35C24DC7D3FD0FC71 /* libPods-AttestationDeplacementDerogatoire.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,46 +29,46 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = AttestationCovid19;
+			remoteInfo = AttestationDeplacementDerogatoire;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
-			remoteInfo = "AttestationCovid19-tvOS";
+			remoteInfo = "AttestationDeplacementDerogatoire-tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* AttestationCovid19Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AttestationCovid19Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* AttestationDeplacementDerogatoireTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AttestationDeplacementDerogatoireTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* AttestationCovid19Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttestationCovid19Tests.m; sourceTree = "<group>"; };
-		0E28CBD35C24DC7D3FD0FC71 /* libPods-AttestationCovid19.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AttestationCovid19.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* AttestationCovid19.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AttestationCovid19.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = AttestationCovid19/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = AttestationCovid19/AppDelegate.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* AttestationDeplacementDerogatoireTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttestationDeplacementDerogatoireTests.m; sourceTree = "<group>"; };
+		0E28CBD35C24DC7D3FD0FC71 /* libPods-AttestationDeplacementDerogatoire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AttestationDeplacementDerogatoire.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* AttestationDeplacementDerogatoire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AttestationDeplacementDerogatoire.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = AttestationDeplacementDerogatoire/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = AttestationDeplacementDerogatoire/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = AttestationCovid19/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AttestationCovid19/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AttestationCovid19/main.m; sourceTree = "<group>"; };
-		1CBB908DB0E684DFCB26F4F7 /* Pods-AttestationCovid19-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationCovid19-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-AttestationCovid19-tvOSTests/Pods-AttestationCovid19-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		1CCEB4127CC409B0D7B351B9 /* Pods-AttestationCovid19-AttestationCovid19Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationCovid19-AttestationCovid19Tests.debug.xcconfig"; path = "Target Support Files/Pods-AttestationCovid19-AttestationCovid19Tests/Pods-AttestationCovid19-AttestationCovid19Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		21451DBEE3203D4478C32B79 /* Pods-AttestationCovid19.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationCovid19.release.xcconfig"; path = "Target Support Files/Pods-AttestationCovid19/Pods-AttestationCovid19.release.xcconfig"; sourceTree = "<group>"; };
-		24F777276AC7535068E98BCB /* libPods-AttestationCovid19-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AttestationCovid19-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E47B1E0B4A5D006451C7 /* AttestationCovid19-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AttestationCovid19-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D02E4901E0B4A5D006451C7 /* AttestationCovid19-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AttestationCovid19-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		58BCFD57EE93B2DDF3C5BA14 /* Pods-AttestationCovid19-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationCovid19-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-AttestationCovid19-tvOS/Pods-AttestationCovid19-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = AttestationDeplacementDerogatoire/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AttestationDeplacementDerogatoire/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AttestationDeplacementDerogatoire/main.m; sourceTree = "<group>"; };
+		1CBB908DB0E684DFCB26F4F7 /* Pods-AttestationDeplacementDerogatoire-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationDeplacementDerogatoire-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-AttestationDeplacementDerogatoire-tvOSTests/Pods-AttestationDeplacementDerogatoire-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1CCEB4127CC409B0D7B351B9 /* Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.debug.xcconfig"; path = "Target Support Files/Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests/Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.debug.xcconfig"; sourceTree = "<group>"; };
+		21451DBEE3203D4478C32B79 /* Pods-AttestationDeplacementDerogatoire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationDeplacementDerogatoire.release.xcconfig"; path = "Target Support Files/Pods-AttestationDeplacementDerogatoire/Pods-AttestationDeplacementDerogatoire.release.xcconfig"; sourceTree = "<group>"; };
+		24F777276AC7535068E98BCB /* libPods-AttestationDeplacementDerogatoire-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AttestationDeplacementDerogatoire-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E47B1E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AttestationDeplacementDerogatoire-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D02E4901E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AttestationDeplacementDerogatoire-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		58BCFD57EE93B2DDF3C5BA14 /* Pods-AttestationDeplacementDerogatoire-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationDeplacementDerogatoire-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-AttestationDeplacementDerogatoire-tvOS/Pods-AttestationDeplacementDerogatoire-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		5E491C7F2444836E008ACD1F /* template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = template.pdf; sourceTree = "<group>"; };
-		60D1AC35BABA24E4BE91BE7D /* libPods-AttestationCovid19-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AttestationCovid19-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		880B8D25F67A18A9C3D1B538 /* libPods-AttestationCovid19-AttestationCovid19Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AttestationCovid19-AttestationCovid19Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A47BAC3698CE6F40C1347A01 /* Pods-AttestationCovid19-AttestationCovid19Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationCovid19-AttestationCovid19Tests.release.xcconfig"; path = "Target Support Files/Pods-AttestationCovid19-AttestationCovid19Tests/Pods-AttestationCovid19-AttestationCovid19Tests.release.xcconfig"; sourceTree = "<group>"; };
-		AABA94246561766D57EA88DE /* Pods-AttestationCovid19-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationCovid19-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-AttestationCovid19-tvOSTests/Pods-AttestationCovid19-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		B3189970892DB079E6B59F7F /* Pods-AttestationCovid19.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationCovid19.debug.xcconfig"; path = "Target Support Files/Pods-AttestationCovid19/Pods-AttestationCovid19.debug.xcconfig"; sourceTree = "<group>"; };
+		60D1AC35BABA24E4BE91BE7D /* libPods-AttestationDeplacementDerogatoire-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AttestationDeplacementDerogatoire-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		880B8D25F67A18A9C3D1B538 /* libPods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A47BAC3698CE6F40C1347A01 /* Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.release.xcconfig"; path = "Target Support Files/Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests/Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.release.xcconfig"; sourceTree = "<group>"; };
+		AABA94246561766D57EA88DE /* Pods-AttestationDeplacementDerogatoire-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationDeplacementDerogatoire-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-AttestationDeplacementDerogatoire-tvOSTests/Pods-AttestationDeplacementDerogatoire-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		B3189970892DB079E6B59F7F /* Pods-AttestationDeplacementDerogatoire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationDeplacementDerogatoire.debug.xcconfig"; path = "Target Support Files/Pods-AttestationDeplacementDerogatoire/Pods-AttestationDeplacementDerogatoire.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F43AA08B2A6FAB7AC89B562B /* Pods-AttestationCovid19-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationCovid19-tvOS.release.xcconfig"; path = "Target Support Files/Pods-AttestationCovid19-tvOS/Pods-AttestationCovid19-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		F43AA08B2A6FAB7AC89B562B /* Pods-AttestationDeplacementDerogatoire-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationDeplacementDerogatoire-tvOS.release.xcconfig"; path = "Target Support Files/Pods-AttestationDeplacementDerogatoire-tvOS/Pods-AttestationDeplacementDerogatoire-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83F2DB1DFCF99DEE2A8472AD /* libPods-AttestationCovid19-AttestationCovid19Tests.a in Frameworks */,
+				83F2DB1DFCF99DEE2A8472AD /* libPods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CC39EF97A419DB9BBF39E9A /* libPods-AttestationCovid19.a in Frameworks */,
+				8CC39EF97A419DB9BBF39E9A /* libPods-AttestationDeplacementDerogatoire.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B227B6298B3011E17DCA5BF /* libPods-AttestationCovid19-tvOS.a in Frameworks */,
+				4B227B6298B3011E17DCA5BF /* libPods-AttestationDeplacementDerogatoire-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,20 +100,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66AC7762805B7EA5C9DD2EC6 /* libPods-AttestationCovid19-tvOSTests.a in Frameworks */,
+				66AC7762805B7EA5C9DD2EC6 /* libPods-AttestationDeplacementDerogatoire-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* AttestationCovid19Tests */ = {
+		00E356EF1AD99517003FC87E /* AttestationDeplacementDerogatoireTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* AttestationCovid19Tests.m */,
+				00E356F21AD99517003FC87E /* AttestationDeplacementDerogatoireTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = AttestationCovid19Tests;
+			path = AttestationDeplacementDerogatoireTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -124,7 +124,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* AttestationCovid19 */ = {
+		13B07FAE1A68108700A75B9A /* AttestationDeplacementDerogatoire */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -135,7 +135,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = AttestationCovid19;
+			name = AttestationDeplacementDerogatoire;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -143,10 +143,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				0E28CBD35C24DC7D3FD0FC71 /* libPods-AttestationCovid19.a */,
-				880B8D25F67A18A9C3D1B538 /* libPods-AttestationCovid19-AttestationCovid19Tests.a */,
-				60D1AC35BABA24E4BE91BE7D /* libPods-AttestationCovid19-tvOS.a */,
-				24F777276AC7535068E98BCB /* libPods-AttestationCovid19-tvOSTests.a */,
+				0E28CBD35C24DC7D3FD0FC71 /* libPods-AttestationDeplacementDerogatoire.a */,
+				880B8D25F67A18A9C3D1B538 /* libPods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.a */,
+				60D1AC35BABA24E4BE91BE7D /* libPods-AttestationDeplacementDerogatoire-tvOS.a */,
+				24F777276AC7535068E98BCB /* libPods-AttestationDeplacementDerogatoire-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -154,14 +154,14 @@
 		5A05714A401B9B60924E7A21 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B3189970892DB079E6B59F7F /* Pods-AttestationCovid19.debug.xcconfig */,
-				21451DBEE3203D4478C32B79 /* Pods-AttestationCovid19.release.xcconfig */,
-				1CCEB4127CC409B0D7B351B9 /* Pods-AttestationCovid19-AttestationCovid19Tests.debug.xcconfig */,
-				A47BAC3698CE6F40C1347A01 /* Pods-AttestationCovid19-AttestationCovid19Tests.release.xcconfig */,
-				58BCFD57EE93B2DDF3C5BA14 /* Pods-AttestationCovid19-tvOS.debug.xcconfig */,
-				F43AA08B2A6FAB7AC89B562B /* Pods-AttestationCovid19-tvOS.release.xcconfig */,
-				1CBB908DB0E684DFCB26F4F7 /* Pods-AttestationCovid19-tvOSTests.debug.xcconfig */,
-				AABA94246561766D57EA88DE /* Pods-AttestationCovid19-tvOSTests.release.xcconfig */,
+				B3189970892DB079E6B59F7F /* Pods-AttestationDeplacementDerogatoire.debug.xcconfig */,
+				21451DBEE3203D4478C32B79 /* Pods-AttestationDeplacementDerogatoire.release.xcconfig */,
+				1CCEB4127CC409B0D7B351B9 /* Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.debug.xcconfig */,
+				A47BAC3698CE6F40C1347A01 /* Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.release.xcconfig */,
+				58BCFD57EE93B2DDF3C5BA14 /* Pods-AttestationDeplacementDerogatoire-tvOS.debug.xcconfig */,
+				F43AA08B2A6FAB7AC89B562B /* Pods-AttestationDeplacementDerogatoire-tvOS.release.xcconfig */,
+				1CBB908DB0E684DFCB26F4F7 /* Pods-AttestationDeplacementDerogatoire-tvOSTests.debug.xcconfig */,
+				AABA94246561766D57EA88DE /* Pods-AttestationDeplacementDerogatoire-tvOSTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -177,9 +177,9 @@
 			isa = PBXGroup;
 			children = (
 				5E491C7F2444836E008ACD1F /* template.pdf */,
-				13B07FAE1A68108700A75B9A /* AttestationCovid19 */,
+				13B07FAE1A68108700A75B9A /* AttestationDeplacementDerogatoire */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* AttestationCovid19Tests */,
+				00E356EF1AD99517003FC87E /* AttestationDeplacementDerogatoireTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				5A05714A401B9B60924E7A21 /* Pods */,
@@ -192,10 +192,10 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* AttestationCovid19.app */,
-				00E356EE1AD99517003FC87E /* AttestationCovid19Tests.xctest */,
-				2D02E47B1E0B4A5D006451C7 /* AttestationCovid19-tvOS.app */,
-				2D02E4901E0B4A5D006451C7 /* AttestationCovid19-tvOSTests.xctest */,
+				13B07F961A680F5B00A75B9A /* AttestationDeplacementDerogatoire.app */,
+				00E356EE1AD99517003FC87E /* AttestationDeplacementDerogatoireTests.xctest */,
+				2D02E47B1E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOS.app */,
+				2D02E4901E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -203,9 +203,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* AttestationCovid19Tests */ = {
+		00E356ED1AD99517003FC87E /* AttestationDeplacementDerogatoireTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "AttestationCovid19Tests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "AttestationDeplacementDerogatoireTests" */;
 			buildPhases = (
 				A538F16AFD5DE0F1413D93CF /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -217,14 +217,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = AttestationCovid19Tests;
-			productName = AttestationCovid19Tests;
-			productReference = 00E356EE1AD99517003FC87E /* AttestationCovid19Tests.xctest */;
+			name = AttestationDeplacementDerogatoireTests;
+			productName = AttestationDeplacementDerogatoireTests;
+			productReference = 00E356EE1AD99517003FC87E /* AttestationDeplacementDerogatoireTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* AttestationCovid19 */ = {
+		13B07F861A680F5B00A75B9A /* AttestationDeplacementDerogatoire */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "AttestationCovid19" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "AttestationDeplacementDerogatoire" */;
 			buildPhases = (
 				95567E0E9B880FB62867B70E /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -237,14 +237,14 @@
 			);
 			dependencies = (
 			);
-			name = AttestationCovid19;
-			productName = AttestationCovid19;
-			productReference = 13B07F961A680F5B00A75B9A /* AttestationCovid19.app */;
+			name = AttestationDeplacementDerogatoire;
+			productName = AttestationDeplacementDerogatoire;
+			productReference = 13B07F961A680F5B00A75B9A /* AttestationDeplacementDerogatoire.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E47A1E0B4A5D006451C7 /* AttestationCovid19-tvOS */ = {
+		2D02E47A1E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AttestationCovid19-tvOS" */;
+			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AttestationDeplacementDerogatoire-tvOS" */;
 			buildPhases = (
 				25F96082995C0B50E0988759 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
@@ -257,14 +257,14 @@
 			);
 			dependencies = (
 			);
-			name = "AttestationCovid19-tvOS";
-			productName = "AttestationCovid19-tvOS";
-			productReference = 2D02E47B1E0B4A5D006451C7 /* AttestationCovid19-tvOS.app */;
+			name = "AttestationDeplacementDerogatoire-tvOS";
+			productName = "AttestationDeplacementDerogatoire-tvOS";
+			productReference = 2D02E47B1E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2D02E48F1E0B4A5D006451C7 /* AttestationCovid19-tvOSTests */ = {
+		2D02E48F1E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AttestationCovid19-tvOSTests" */;
+			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AttestationDeplacementDerogatoire-tvOSTests" */;
 			buildPhases = (
 				9A48EE7302953EA801E6D599 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
@@ -276,9 +276,9 @@
 			dependencies = (
 				2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */,
 			);
-			name = "AttestationCovid19-tvOSTests";
-			productName = "AttestationCovid19-tvOSTests";
-			productReference = 2D02E4901E0B4A5D006451C7 /* AttestationCovid19-tvOSTests.xctest */;
+			name = "AttestationDeplacementDerogatoire-tvOSTests";
+			productName = "AttestationDeplacementDerogatoire-tvOSTests";
+			productReference = 2D02E4901E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -307,7 +307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "AttestationCovid19" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "AttestationDeplacementDerogatoire" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -320,10 +320,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* AttestationCovid19 */,
-				00E356ED1AD99517003FC87E /* AttestationCovid19Tests */,
-				2D02E47A1E0B4A5D006451C7 /* AttestationCovid19-tvOS */,
-				2D02E48F1E0B4A5D006451C7 /* AttestationCovid19-tvOSTests */,
+				13B07F861A680F5B00A75B9A /* AttestationDeplacementDerogatoire */,
+				00E356ED1AD99517003FC87E /* AttestationDeplacementDerogatoireTests */,
+				2D02E47A1E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOS */,
+				2D02E48F1E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -393,7 +393,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AttestationCovid19-tvOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AttestationDeplacementDerogatoire-tvOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -429,7 +429,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AttestationCovid19-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AttestationDeplacementDerogatoire-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -451,7 +451,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AttestationCovid19-tvOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AttestationDeplacementDerogatoire-tvOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -473,7 +473,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AttestationCovid19-AttestationCovid19Tests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -525,7 +525,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* AttestationCovid19Tests.m in Sources */,
+				00E356F31AD99517003FC87E /* AttestationDeplacementDerogatoireTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,7 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DCD954D1E0B4F2C00145EB5 /* AttestationCovid19Tests.m in Sources */,
+				2DCD954D1E0B4F2C00145EB5 /* AttestationDeplacementDerogatoireTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,12 +560,12 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* AttestationCovid19 */;
+			target = 13B07F861A680F5B00A75B9A /* AttestationDeplacementDerogatoire */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 		2D02E4921E0B4A5D006451C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2D02E47A1E0B4A5D006451C7 /* AttestationCovid19-tvOS */;
+			target = 2D02E47A1E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -577,7 +577,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = AttestationCovid19;
+			path = AttestationDeplacementDerogatoire;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -585,14 +585,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CCEB4127CC409B0D7B351B9 /* Pods-AttestationCovid19-AttestationCovid19Tests.debug.xcconfig */;
+			baseConfigurationReference = 1CCEB4127CC409B0D7B351B9 /* Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = AttestationCovid19Tests/Info.plist;
+				INFOPLIST_FILE = AttestationDeplacementDerogatoireTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -602,17 +602,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AttestationCovid19.app/AttestationCovid19";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AttestationDeplacementDerogatoire.app/AttestationDeplacementDerogatoire";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A47BAC3698CE6F40C1347A01 /* Pods-AttestationCovid19-AttestationCovid19Tests.release.xcconfig */;
+			baseConfigurationReference = A47BAC3698CE6F40C1347A01 /* Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = AttestationCovid19Tests/Info.plist;
+				INFOPLIST_FILE = AttestationDeplacementDerogatoireTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -622,13 +622,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AttestationCovid19.app/AttestationCovid19";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AttestationDeplacementDerogatoire.app/AttestationDeplacementDerogatoire";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3189970892DB079E6B59F7F /* Pods-AttestationCovid19.debug.xcconfig */;
+			baseConfigurationReference = B3189970892DB079E6B59F7F /* Pods-AttestationDeplacementDerogatoire.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -638,7 +638,7 @@
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
-				INFOPLIST_FILE = AttestationCovid19/Info.plist;
+				INFOPLIST_FILE = AttestationDeplacementDerogatoire/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -646,7 +646,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = AttestationCovid19;
+				PRODUCT_NAME = AttestationDeplacementDerogatoire;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -655,12 +655,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21451DBEE3203D4478C32B79 /* Pods-AttestationCovid19.release.xcconfig */;
+			baseConfigurationReference = 21451DBEE3203D4478C32B79 /* Pods-AttestationDeplacementDerogatoire.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = AttestationCovid19/Info.plist;
+				INFOPLIST_FILE = AttestationDeplacementDerogatoire/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -668,7 +668,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = AttestationCovid19;
+				PRODUCT_NAME = AttestationDeplacementDerogatoire;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -676,7 +676,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 58BCFD57EE93B2DDF3C5BA14 /* Pods-AttestationCovid19-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 58BCFD57EE93B2DDF3C5BA14 /* Pods-AttestationDeplacementDerogatoire-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -687,14 +687,14 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "AttestationCovid19-tvOS/Info.plist";
+				INFOPLIST_FILE = "AttestationDeplacementDerogatoire-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.AttestationCovid19-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.AttestationDeplacementDerogatoire-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -704,7 +704,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F43AA08B2A6FAB7AC89B562B /* Pods-AttestationCovid19-tvOS.release.xcconfig */;
+			baseConfigurationReference = F43AA08B2A6FAB7AC89B562B /* Pods-AttestationDeplacementDerogatoire-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -715,14 +715,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "AttestationCovid19-tvOS/Info.plist";
+				INFOPLIST_FILE = "AttestationDeplacementDerogatoire-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.AttestationCovid19-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.AttestationDeplacementDerogatoire-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -732,7 +732,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CBB908DB0E684DFCB26F4F7 /* Pods-AttestationCovid19-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 1CBB908DB0E684DFCB26F4F7 /* Pods-AttestationDeplacementDerogatoire-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -742,24 +742,24 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "AttestationCovid19-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "AttestationDeplacementDerogatoire-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.AttestationCovid19-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.AttestationDeplacementDerogatoire-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AttestationCovid19-tvOS.app/AttestationCovid19-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AttestationDeplacementDerogatoire-tvOS.app/AttestationDeplacementDerogatoire-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Debug;
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AABA94246561766D57EA88DE /* Pods-AttestationCovid19-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = AABA94246561766D57EA88DE /* Pods-AttestationDeplacementDerogatoire-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -769,17 +769,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "AttestationCovid19-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "AttestationDeplacementDerogatoire-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.AttestationCovid19-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.AttestationDeplacementDerogatoire-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AttestationCovid19-tvOS.app/AttestationCovid19-tvOS";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AttestationDeplacementDerogatoire-tvOS.app/AttestationDeplacementDerogatoire-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 			};
 			name = Release;
@@ -900,7 +900,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "AttestationCovid19Tests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "AttestationDeplacementDerogatoireTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -909,7 +909,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "AttestationCovid19" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "AttestationDeplacementDerogatoire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -918,7 +918,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AttestationCovid19-tvOS" */ = {
+		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AttestationDeplacementDerogatoire-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4971E0B4A5E006451C7 /* Debug */,
@@ -927,7 +927,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AttestationCovid19-tvOSTests" */ = {
+		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "AttestationDeplacementDerogatoire-tvOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D02E4991E0B4A5E006451C7 /* Debug */,
@@ -936,7 +936,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "AttestationCovid19" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "AttestationDeplacementDerogatoire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

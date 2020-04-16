@@ -1,4 +1,4 @@
-package com.attestcovid19;
+package com.attestationdeplacementderogatoire;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "AttestationCovid19";
+    return "AttestationDeplacementDerogatoire";
   }
 }

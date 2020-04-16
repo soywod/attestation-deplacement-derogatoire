@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.attestcovid19"
+        applicationId "com.attestationdeplacementderogatoire"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -153,11 +153,11 @@ android {
             keyPassword 'android'
         }
         release {
-            if (project.hasProperty('ATTESTATION_COVID_19_UPLOAD_STORE_FILE')) {
-                storeFile file(ATTESTATION_COVID_19_UPLOAD_STORE_FILE)
-                storePassword ATTESTATION_COVID_19_UPLOAD_STORE_PASSWORD
-                keyAlias ATTESTATION_COVID_19_UPLOAD_KEY_ALIAS
-                keyPassword ATTESTATION_COVID_19_UPLOAD_KEY_PASSWORD
+            if (project.hasProperty('ATTESTATION_DEPLACEMENT_DEROGATOIRE_UPLOAD_STORE_FILE')) {
+                storeFile file(ATTESTATION_DEPLACEMENT_DEROGATOIRE_UPLOAD_STORE_FILE)
+                storePassword ATTESTATION_DEPLACEMENT_DEROGATOIRE_UPLOAD_STORE_PASSWORD
+                keyAlias ATTESTATION_DEPLACEMENT_DEROGATOIRE_UPLOAD_KEY_ALIAS
+                keyPassword ATTESTATION_DEPLACEMENT_DEROGATOIRE_UPLOAD_KEY_PASSWORD
             }
         }
     }

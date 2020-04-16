@@ -1,9 +1,9 @@
 {
-  "name": "attestation-covid-19",
-  "description": "Application mobile de génération de l'attestation de déplacement dérogatoire à présenter dans le cadre du confinement lié au virus COVID-19.",
+  "name": "attestation-deplacement-derogatoire",
+  "description": "Application mobile de génération d'attestation de déplacement dérogatoire.",
   "author": "soywod <clement.douin@posteo.net>",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "1.0",
   "private": true,
   "keywords": [
     "attestation",
@@ -14,13 +14,13 @@
     "react-native",
     "typescript"
   ],
-  "homepage": "https://github.com/soywod/attestation-covid-19",
+  "homepage": "https://github.com/soywod/attestation-deplacement-derogatoire",
   "repository": {
     "type": "git",
-    "url": "https://github.com/soywod/attestation-covid-19.git"
+    "url": "https://github.com/soywod/attestation-deplacement-derogatoire.git"
   },
   "bugs": {
-    "url": "https://github.com/soywod/attestation-covid-19/issues"
+    "url": "https://github.com/soywod/attestation-deplacement-derogatoire/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
