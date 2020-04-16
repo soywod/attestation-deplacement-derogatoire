@@ -60,6 +60,13 @@
             ReferencedContainer = "container:AttestationDeplacementDerogatoire.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "ENTRY_FILE"
+            value = "index.js"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

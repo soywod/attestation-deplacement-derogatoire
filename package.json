@@ -74,11 +74,12 @@
     "android:bundle:clean:drawable": "rm -rf android/app/src/main/res/drawable-*",
     "android:bundle:clean:raw": "rm -rf android/app/src/main/res/raw/*",
     "preandroid:bundle": "run-s android:bundle:clean:* android:bundle:jetifier",
-    "android:bundle": "react-native bundle --platform android --dev false --entry-file index.ts --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release/",
+    "android:bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/build/intermediates/res/merged/release/",
     "android:assemble": "cd android && ./gradlew assembleRelease",
     "preandroid:release": "yarn android:bundle",
     "android:release": "yarn android:assemble",
     "ios": "react-native run-ios",
+    "ios:bundle": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/AttestationDeplacementDerogatoire/main.jsbundle --assets-dest ios",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
