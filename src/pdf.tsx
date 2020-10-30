@@ -49,7 +49,7 @@ async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: strin
   const {lastName, firstName, dateOfBirth, placeOfBirth, address, city, zip} = profile
   const readFile = Platform.OS === "android" ? RNFS.readFileAssets : RNFS.readFile
   const tplPath = Platform.OS === "android" ? "" : RNFS.MainBundlePath + "/"
-  const existingPdfBytes = await readFile(tplPath + "template.pdf", "base64")
+  const existingPdfBytes = await readFile(tplPath + "template-v2.pdf", "base64")
 
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
   const page1 = pdfDoc.getPages()[0]
@@ -59,18 +59,20 @@ async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: strin
     page1.drawText(text, {x, y, size, font})
   }
 
-  drawText(`${firstName} ${lastName}`, 135, 685)
-  drawText(DateTime.fromISO(dateOfBirth).toFormat(DATE_FMT), 135, 661)
-  drawText(placeOfBirth, 135, 637)
-  drawText(`${address}, ${zip} ${city}`, 135, 612)
+  drawText(`${firstName} ${lastName}`, 135, 696)
+  drawText(DateTime.fromISO(dateOfBirth).toFormat(DATE_FMT), 135, 674)
+  drawText(placeOfBirth, 320, 674)
+  drawText(`${address}, ${zip} ${city}`, 135, 652)
 
-  reasons.includes("travail") && drawText("×", 76, 527, 19)
-  reasons.includes("courses") && drawText("×", 76, 477, 19)
-  reasons.includes("sante") && drawText("×", 76, 436, 19)
-  reasons.includes("famille") && drawText("×", 76, 400, 19)
-  reasons.includes("sport") && drawText("×", 76, 344, 19)
-  reasons.includes("judiciaire") && drawText("×", 76, 297, 19)
-  reasons.includes("missions") && drawText("×", 76, 261, 19)
+  reasons.includes("work") && drawText("×", 82, 578, 20)
+  reasons.includes("food") && drawText("×", 82, 533, 20)
+  reasons.includes("health") && drawText("×", 82, 477, 20)
+  reasons.includes("family") && drawText("×", 82, 436, 20)
+  reasons.includes("handicap") && drawText("×", 82, 395, 20)
+  reasons.includes("sport") && drawText("×", 82, 357, 20)
+  reasons.includes("judicial") && drawText("×", 82, 294, 20)
+  reasons.includes("missions") && drawText("×", 82, 255, 20)
+  reasons.includes("children") && drawText("×", 82, 210, 20)
 
   let locationSize = idealFontSize(font, city, 83, 7, 11)
 
@@ -82,18 +84,18 @@ async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: strin
     locationSize = 7
   }
 
-  drawText(profile.city, 111, 225, locationSize)
-
-  drawText(`${now.toFormat(DATE_FMT)}`, 92, 201)
-  drawText(now.toFormat(TIME_FMT), 200, 201)
-  drawText("Date de création:", 464, 150, 7)
-  drawText(`${now.toFormat(DATE_FMT)} à ${now.toFormat(TIME_FMT)}`, 455, 144, 7)
+  drawText(profile.city, 111, 175, locationSize)
+  drawText(`${now.toFormat(DATE_FMT)}`, 111, 153)
+  drawText(now.toFormat(TIME_FMT), 275, 153)
+  drawText(`${firstName} ${lastName}`, 130, 119)
+  drawText("Date de création:", 464, 110, 7)
+  drawText(`${now.toFormat(DATE_FMT)} à ${now.toFormat(TIME_FMT)}`, 455, 104, 7)
 
   const qrImage = await pdfDoc.embedPng(qrcode)
 
   page1.drawImage(qrImage, {
     x: page1.getWidth() - 160,
-    y: 165,
+    y: 125,
     width: 80,
     height: 80,
   })

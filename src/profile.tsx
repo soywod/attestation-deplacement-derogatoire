@@ -178,7 +178,6 @@ export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
         <>
           <DateTimePicker
             display="spinner"
-            maximumDate={now.toJSDate()}
             value={dateOfBirth ? DateTime.fromISO(dateOfBirth).toJSDate() : now.toJSDate()}
             onChange={(_, date) => {
               Platform.OS === "android" && setDateOfBirthPickerVisible(false)

@@ -3,7 +3,6 @@ import {useToggle} from "react-captain"
 import {
   Button,
   GestureResponderEvent,
-  Linking,
   ScrollView,
   StyleSheet,
   Switch,
@@ -14,22 +13,26 @@ import {
 import {NavigationStackScreenComponent} from "react-navigation-stack"
 
 export type ReasonKey =
-  | "travail"
-  | "courses"
-  | "sante"
-  | "famille"
+  | "work"
+  | "food"
+  | "health"
+  | "family"
+  | "handicap"
   | "sport"
-  | "judiciaire"
+  | "judicial"
   | "missions"
+  | "children"
 
 export const reasonKeys: ReasonKey[] = [
-  "travail",
-  "courses",
-  "sante",
-  "famille",
+  "work",
+  "food",
+  "health",
+  "family",
+  "handicap",
   "sport",
-  "judiciaire",
+  "judicial",
   "missions",
+  "children",
 ]
 
 export let reasons: ReasonKey[]
@@ -49,41 +52,33 @@ const s = StyleSheet.create({
 })
 
 const allReasons: {[key in ReasonKey]: JSX.Element} = {
-  travail: (
+  work: (
     <Text>
-      Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle, lorsqu'ils
-      sont indispensables à l'exercice d’activités ne pouvant être organisées sous forme de
-      télétravail ou déplacements professionnels ne pouvant être différés.
+      Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un
+      établissement d’enseignement ou de formation, déplacements professionnels ne pouvant être
+      différés, déplacements pour un concours ou un examen.
     </Text>
   ),
-  courses: (
+  food: (
     <Text>
-      Déplacements pour effectuer des achats de fournitures nécessaires à l’activité professionnelle
-      et des achats de première nécessité dans des établissements dont les activités demeurent
-      autorisées (liste sur{" "}
-      <Text
-        onPress={() =>
-          Linking.openURL("https://www.service-public.fr/particuliers/actualites/A13921")
-        }
-        style={s.link}
-      >
-        gouvernement.fr
-      </Text>
-      )
+      Déplacements pour effectuer des achats de fournitures nécessaires à l'activité
+      professionnelle, des achats de première nécessité dans des établissements dont les activités
+      demeurent autorisées, le retrait de commande et les livraisons à domicile.
     </Text>
   ),
-  sante: (
+  health: (
     <Text>
-      Consultations et soins ne pouvant être assurés à distance et ne pouvant être différés ;
-      consultations et soins des patients atteints d'une affection de longue durée.
+      Consultations, examens et soins ne pouvant être ni assurés à distance ni différés et l’achat
+      de médicaments.
     </Text>
   ),
-  famille: (
+  family: (
     <Text>
-      Déplacements pour motif familial impérieux, pour l’assistance aux personnes vulnérables ou la
-      garde d’enfants.
+      Déplacements pour motif familial impérieux, pour l'assistance aux personnes vulnérables et
+      précaires ou la garde d'enfants.
     </Text>
   ),
+  handicap: <Text>Déplacement des personnes en situation de handicap et leur accompagnant.</Text>,
   sport: (
     <Text>
       Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un
@@ -93,10 +88,16 @@ const allReasons: {[key in ReasonKey]: JSX.Element} = {
       soit aux besoins des animaux de compagnie.
     </Text>
   ),
-  judiciaire: <>Convocation judiciaire ou administrative.</>,
+  judicial: <>Convocation judiciaire ou administrative et pour se rendre dans un service public.</>,
   missions: (
     <Text>
-      Participation à des missions d’intérêt général sur demande de l’autorité administrative.
+      Participation à des missions d'intérêt général sur demande de l'autorité administrative.
+    </Text>
+  ),
+  children: (
+    <Text>
+      Déplacement pour chercher les enfants à l’école et à l’occasion de leurs activités
+      périscolaires.
     </Text>
   ),
 }
