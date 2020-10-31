@@ -6,7 +6,7 @@ const s = StyleSheet.create({
 });
 
 const Loader: FC = () => {
-  return <ActivityIndicator size="large" style={s.loader} />;
+  return <ActivityIndicator animating color="#333333" size="large" style={s.loader} />;
 };
 
 export default Loader;
