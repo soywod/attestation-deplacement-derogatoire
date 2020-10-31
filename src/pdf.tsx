@@ -18,12 +18,10 @@ import {useBehaviorSubject} from "react-captain"
 import {DateTime} from "luxon"
 import {PDFDocument, StandardFonts, PDFFont} from "pdf-lib"
 
+import {DATE_FMT, TIME_FMT} from "./datetime-picker"
 import {Profile, profile$} from "./profile"
-import {ReasonKey, reasons} from "./reasons"
+import {ReasonKey, reasons, dateStr, timeStr} from "./reasons"
 import Loader from "./loader"
-
-const DATE_FMT = "dd/MM/yyyy"
-const TIME_FMT = "HH'h'mm"
 
 let lastPdf: string
 
@@ -45,8 +43,8 @@ function idealFontSize(
 }
 
 async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: string) {
-  const now = DateTime.local()
   const {lastName, firstName, dateOfBirth, placeOfBirth, address, city, zip} = profile
+  const now = DateTime.local()
   const readFile = Platform.OS === "android" ? RNFS.readFileAssets : RNFS.readFile
   const tplPath = Platform.OS === "android" ? "" : RNFS.MainBundlePath + "/"
   const existingPdfBytes = await readFile(tplPath + "template-v3.pdf", "base64")
@@ -64,15 +62,15 @@ async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: strin
   drawText(placeOfBirth, 320, 674)
   drawText(`${address}, ${zip} ${city}`, 135, 652)
 
-  reasons.includes("work") && drawText("×", 77, 577, 20)
-  reasons.includes("food") && drawText("×", 77, 532, 20)
-  reasons.includes("health") && drawText("×", 77, 476, 20)
-  reasons.includes("family") && drawText("×", 77, 435, 20)
+  reasons.includes("travail") && drawText("×", 77, 577, 20)
+  reasons.includes("achats") && drawText("×", 77, 532, 20)
+  reasons.includes("sante") && drawText("×", 77, 476, 20)
+  reasons.includes("famille") && drawText("×", 77, 435, 20)
   reasons.includes("handicap") && drawText("×", 77, 394, 20)
-  reasons.includes("sport") && drawText("×", 77, 356, 20)
-  reasons.includes("judicial") && drawText("×", 77, 293, 20)
+  reasons.includes("sport_animaux") && drawText("×", 77, 356, 20)
+  reasons.includes("convocation") && drawText("×", 77, 293, 20)
   reasons.includes("missions") && drawText("×", 77, 254, 20)
-  reasons.includes("children") && drawText("×", 77, 209, 20)
+  reasons.includes("enfants") && drawText("×", 77, 209, 20)
 
   let locationSize = idealFontSize(font, city, 83, 7, 11)
 
@@ -85,8 +83,8 @@ async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: strin
   }
 
   drawText(profile.city, 111, 175, locationSize)
-  drawText(`${now.toFormat(DATE_FMT)}`, 111, 153)
-  drawText(now.toFormat(TIME_FMT), 275, 153)
+  drawText(dateStr, 111, 153)
+  drawText(timeStr, 275, 153)
   drawText(`${firstName} ${lastName}`, 130, 119)
   drawText("Date de création:", 464, 110, 7)
   drawText(`${now.toFormat(DATE_FMT)} à ${now.toFormat(TIME_FMT)}`, 455, 104, 7)
@@ -137,9 +135,9 @@ const s = StyleSheet.create({
 })
 
 const PDFScreen: NavigationStackScreenComponent = () => {
+  const now = DateTime.local()
   const [profile] = useBehaviorSubject(profile$)
   const [pdf, setPdf] = useState<string | null>(null)
-  const now = DateTime.local()
   const qrCodeData = [
     `Cree le: ${now.toFormat(DATE_FMT)} a ${now.toFormat(TIME_FMT)}`,
     `Nom: ${profile.lastName}`,
@@ -148,9 +146,9 @@ const PDFScreen: NavigationStackScreenComponent = () => {
       profile.placeOfBirth
     }`,
     `Adresse: ${profile.address} ${profile.zip} ${profile.city}`,
-    `Sortie: ${now.toFormat(DATE_FMT)} a ${now.toFormat(TIME_FMT)}`,
-    `Motifs: ${reasons.join(" ")}`,
-  ].join("; ")
+    `Sortie: ${dateStr} a ${timeStr}`,
+    `Motifs: ${reasons.join(", ")}`,
+  ].join(";\n ")
 
   function qrCodeDataURLHandler(qrCodeDataURL: string) {
     generatePdf(profile, reasons, qrCodeDataURL.replace(/(\r\n|\n|\r)/gm, "")).then(pdf => {
@@ -176,7 +174,7 @@ const PDFScreen: NavigationStackScreenComponent = () => {
           <Loader />
           <View style={s.qrcodeView}>
             <QRCode
-              ecl="L"
+              ecl="M"
               getRef={svg => svg && svg.toDataURL(qrCodeDataURLHandler)}
               value={qrCodeData}
             />

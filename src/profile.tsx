@@ -1,20 +1,12 @@
-import React, {FC, useEffect, useRef, useState} from "react"
+import React, {FC, useEffect, useState} from "react"
 import {BehaviorSubject} from "rxjs"
-import {useToggle, useBehaviorSubject} from "react-captain"
-import {
-  Alert,
-  Button,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native"
+import {useBehaviorSubject} from "react-captain"
+import {Alert, Button, ScrollView, StyleSheet, TextInput, View} from "react-native"
 import {NavigationStackScreenComponent} from "react-navigation-stack"
-import DateTimePicker from "@react-native-community/datetimepicker"
-import {DateTime} from "luxon"
 import AsyncStorage from "@react-native-community/async-storage"
+import {DateTime} from "luxon"
+
+import DateTimePicker from "./datetime-picker"
 
 export type Profile = {
   firstName: string
@@ -64,7 +56,7 @@ const s = StyleSheet.create({
   button: {paddingVertical: 10},
   address: {display: "flex", flexDirection: "row"},
   city: {flex: 1},
-  zip: {marginLeft: 10, width: 110},
+  zip: {marginRight: 10, width: 110},
   input: {
     opacity: 1,
     backgroundColor: "#ffffff",
@@ -121,8 +113,6 @@ export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
   const [firstName, setFirstName] = useState(profile.firstName)
   const [lastName, setLastName] = useState(profile.lastName)
   const [dateOfBirth, setDateOfBirth] = useState(profile.dateOfBirth)
-  const dateOfBirthPicker = useRef<TextInput | null>(null)
-  const [isDateOfBirthPickerVisible, setDateOfBirthPickerVisible] = useToggle()
   const [placeOfBirth, setPlaceOfBirth] = useState(profile.placeOfBirth)
   const [address, setAddress] = useState(profile.address)
   const [city, setCity] = useState(profile.city)
@@ -159,36 +149,12 @@ export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
         onChangeText={setLastName}
         style={s.input}
       />
-      <TouchableOpacity activeOpacity={0.75} onPress={setDateOfBirthPickerVisible}>
-        <View pointerEvents="none">
-          <TextInput
-            ref={dateOfBirthPicker}
-            placeholder={
-              dateOfBirth
-                ? DateTime.fromISO(dateOfBirth).toFormat("dd/MM/yyyy")
-                : "Date de naissance"
-            }
-            placeholderTextColor={dateOfBirth ? "#333333" : "#d3d3d3"}
-            style={s.input}
-            editable={false}
-          />
-        </View>
-      </TouchableOpacity>
-      {isDateOfBirthPickerVisible && (
-        <>
-          <DateTimePicker
-            display="spinner"
-            value={dateOfBirth ? DateTime.fromISO(dateOfBirth).toJSDate() : now.toJSDate()}
-            onChange={(_, date) => {
-              Platform.OS === "android" && setDateOfBirthPickerVisible(false)
-              setDateOfBirth(date ? DateTime.fromJSDate(date).toISO() : "")
-            }}
-          />
-          {Platform.OS === "ios" && (
-            <Button title="Valider" onPress={() => setDateOfBirthPickerVisible(false)} />
-          )}
-        </>
-      )}
+      <DateTimePicker
+        type="date"
+        placeholder="Date de naissance"
+        defaultValue={dateOfBirth ? DateTime.fromISO(dateOfBirth) : now}
+        onChange={date => setDateOfBirth(date ? date.toISO() : "")}
+      />
       <TextInput
         placeholder="Lieu de naissaince"
         placeholderTextColor="#d3d3d3"
@@ -206,19 +172,19 @@ export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
       />
       <View style={s.address}>
         <TextInput
-          placeholder="Ville"
-          placeholderTextColor="#d3d3d3"
-          value={city || ""}
-          onChangeText={setCity}
-          style={Object.assign({}, s.input, s.city)}
-        />
-        <TextInput
           placeholder="Code postal"
           placeholderTextColor="#d3d3d3"
           value={zip || ""}
           keyboardType="numeric"
           onChangeText={setZip}
           style={Object.assign({}, s.input, s.zip)}
+        />
+        <TextInput
+          placeholder="Ville"
+          placeholderTextColor="#d3d3d3"
+          value={city || ""}
+          onChangeText={setCity}
+          style={Object.assign({}, s.input, s.city)}
         />
       </View>
     </>

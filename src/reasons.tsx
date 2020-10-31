@@ -11,31 +11,36 @@ import {
   View,
 } from "react-native"
 import {NavigationStackScreenComponent} from "react-navigation-stack"
+import {DateTime} from "luxon"
+
+import DateTimePicker, {DATE_FMT, TIME_FMT} from "./datetime-picker"
 
 export type ReasonKey =
-  | "work"
-  | "food"
-  | "health"
-  | "family"
+  | "travail"
+  | "achats"
+  | "sante"
+  | "famille"
   | "handicap"
-  | "sport"
-  | "judicial"
+  | "sport_animaux"
+  | "convocation"
   | "missions"
-  | "children"
+  | "enfants"
 
 export const reasonKeys: ReasonKey[] = [
-  "work",
-  "food",
-  "health",
-  "family",
+  "travail",
+  "achats",
+  "sante",
+  "famille",
   "handicap",
-  "sport",
-  "judicial",
+  "sport_animaux",
+  "convocation",
   "missions",
-  "children",
+  "enfants",
 ]
 
 export let reasons: ReasonKey[]
+export let dateStr: string
+export let timeStr: string
 
 const s = StyleSheet.create({
   container: {height: "100%"},
@@ -52,34 +57,35 @@ const s = StyleSheet.create({
 })
 
 const allReasons: {[key in ReasonKey]: JSX.Element} = {
-  work: (
+  travail: (
     <Text>
       Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un
       établissement d’enseignement ou de formation, déplacements professionnels ne pouvant être
       différés, déplacements pour un concours ou un examen.
     </Text>
   ),
-  food: (
+  achats: (
     <Text>
       Déplacements pour effectuer des achats de fournitures nécessaires à l'activité
       professionnelle, des achats de première nécessité dans des établissements dont les activités
       demeurent autorisées, le retrait de commande et les livraisons à domicile.
     </Text>
   ),
-  health: (
+  sante: (
     <Text>
       Consultations, examens et soins ne pouvant être ni assurés à distance ni différés et l’achat
       de médicaments.
     </Text>
   ),
-  family: (
+  famille: (
     <Text>
       Déplacements pour motif familial impérieux, pour l'assistance aux personnes vulnérables et
       précaires ou la garde d'enfants.
     </Text>
   ),
   handicap: <Text>Déplacement des personnes en situation de handicap et leur accompagnant.</Text>,
-  sport: (
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  sport_animaux: (
     <Text>
       Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un
       kilomètre autour du domicile, liés soit à l'activité physique individuelle des personnes, à
@@ -88,13 +94,15 @@ const allReasons: {[key in ReasonKey]: JSX.Element} = {
       soit aux besoins des animaux de compagnie.
     </Text>
   ),
-  judicial: <>Convocation judiciaire ou administrative et pour se rendre dans un service public.</>,
+  convocation: (
+    <>Convocation judiciaire ou administrative et pour se rendre dans un service public.</>
+  ),
   missions: (
     <Text>
       Participation à des missions d'intérêt général sur demande de l'autorité administrative.
     </Text>
   ),
-  children: (
+  enfants: (
     <Text>
       Déplacement pour chercher les enfants à l’école et à l’occasion de leurs activités
       périscolaires.
@@ -106,13 +114,34 @@ const ReasonsScreen: NavigationStackScreenComponent = props => {
   const reasonsMap = useRef<Partial<{[key in ReasonKey]: boolean}>>({})
 
   function nextStep() {
+    const now = DateTime.local()
     reasons = reasonKeys.filter(key => reasonsMap.current[key])
+    dateStr = dateStr || now.toFormat(DATE_FMT)
+    timeStr = timeStr || now.toFormat(TIME_FMT)
     props.navigation.navigate("PDFScreen")
+  }
+
+  function setDateStr(date?: DateTime) {
+    dateStr = (date || DateTime.local()).toFormat(DATE_FMT)
+  }
+
+  function setTimeStr(date?: DateTime) {
+    timeStr = (date || DateTime.local()).toFormat(TIME_FMT)
   }
 
   return (
     <View style={s.container}>
       <ScrollView style={s.content}>
+        <DateTimePicker
+          type="date"
+          placeholder={`Date de sortie (${DateTime.local().toFormat(DATE_FMT)})`}
+          onChange={setDateStr}
+        />
+        <DateTimePicker
+          type="time"
+          placeholder={`Heure de sortie (${DateTime.local().toFormat(TIME_FMT)})`}
+          onChange={setTimeStr}
+        />
         {reasonKeys.map(key => (
           <Reason key={key} onToggle={val => (reasonsMap.current[key] = val)}>
             {allReasons[key]}
