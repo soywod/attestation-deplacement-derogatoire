@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from "react"
 import {BehaviorSubject} from "rxjs"
-import {useBehaviorSubject} from "react-captain"
+import useObservable from "@soywod/react-use-observable"
 import {Alert, Button, ScrollView, StyleSheet, TextInput, View} from "react-native"
 import {NavigationStackScreenComponent} from "react-navigation-stack"
 import AsyncStorage from "@react-native-community/async-storage"
@@ -108,7 +108,7 @@ ProfileScreen.navigationOptions = () => ({
 
 export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
   const updateProfile = props.onChange
-  const [profile] = useBehaviorSubject(profile$)
+  const [profile] = useObservable(profile$, profile$.value)
   const [firstName, setFirstName] = useState(profile.firstName)
   const [lastName, setLastName] = useState(profile.lastName)
   const [dateOfBirth, setDateOfBirth] = useState(profile.dateOfBirth)

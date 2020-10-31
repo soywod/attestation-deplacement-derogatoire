@@ -1,5 +1,4 @@
 import React, {FC, useRef, useState} from "react"
-import {useToggle} from "react-captain"
 import {Button, Platform, StyleSheet, TextInput, TouchableOpacity, View} from "react-native"
 import RNDateTimePicker from "@react-native-community/datetimepicker"
 import {DateTime} from "luxon"
@@ -32,12 +31,12 @@ export const DateTimePicker: FC<DatetimeProps> = props => {
   const now = DateTime.local()
   const [dateTime, setDateTime] = useState(props.defaultValue)
   const dateTimeRef = useRef<TextInput | null>(null)
-  const [isPickerVisible, setPickerVisible] = useToggle()
+  const [isPickerVisible, setPickerVisible] = useState(false)
   const format = props.type === "date" ? DATE_FMT : TIME_FMT
 
   return (
     <>
-      <TouchableOpacity activeOpacity={0.75} onPress={setPickerVisible}>
+      <TouchableOpacity activeOpacity={0.75} onPress={() => setPickerVisible(!isPickerVisible)}>
         <View pointerEvents="none">
           <TextInput
             ref={dateTimeRef}

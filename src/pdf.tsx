@@ -16,7 +16,7 @@ import RNFS from "react-native-fs"
 import FileViewer from "react-native-file-viewer"
 import QRCode from "react-native-qrcode-svg"
 import Pdf from "react-native-pdf"
-import {useBehaviorSubject} from "react-captain"
+import useObservable from "@soywod/react-use-observable"
 import {DateTime} from "luxon"
 import {PDFDocument, StandardFonts, PDFFont} from "pdf-lib"
 
@@ -168,8 +168,8 @@ const s = StyleSheet.create({
 const PDFScreen: NavigationStackScreenComponent = props => {
   const now = DateTime.local()
   const shouldReset = Boolean((props.navigation.state.params || {}).reset)
-  const [profile] = useBehaviorSubject(profile$)
-  const [pdf] = useBehaviorSubject(pdf$)
+  const [profile] = useObservable(profile$, profile$.value)
+  const [pdf] = useObservable(pdf$, pdf$.value)
   const qrCodeData = [
     `Cree le: ${now.toFormat(DATE_FMT)} a ${now.toFormat(TIME_FMT)}`,
     `Nom: ${profile.lastName}`,

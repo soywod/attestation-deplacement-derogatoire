@@ -1,5 +1,4 @@
-import React, {FC, useEffect, useRef} from "react"
-import {useToggle} from "react-captain"
+import React, {FC, useEffect, useRef, useState} from "react"
 import {
   Button,
   GestureResponderEvent,
@@ -160,7 +159,7 @@ type ReasonProps = {
 }
 
 const Reason: FC<ReasonProps> = props => {
-  const [isOn, toggle] = useToggle()
+  const [isOn, toggle] = useState(false)
 
   useEffect(() => {
     props.onToggle(isOn)
@@ -168,7 +167,7 @@ const Reason: FC<ReasonProps> = props => {
 
   function handlePress(evt: GestureResponderEvent) {
     evt.preventDefault()
-    toggle()
+    toggle(!isOn)
   }
 
   return (
