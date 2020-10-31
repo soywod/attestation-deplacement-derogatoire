@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
+import {BehaviorSubject} from "rxjs"
 import {
   Dimensions,
   PermissionsAndroid,
@@ -10,6 +11,7 @@ import {
   View,
 } from "react-native"
 import {NavigationStackScreenComponent} from "react-navigation-stack"
+import AsyncStorage from "@react-native-community/async-storage"
 import RNFS from "react-native-fs"
 import FileViewer from "react-native-file-viewer"
 import QRCode from "react-native-qrcode-svg"
@@ -23,7 +25,36 @@ import {Profile, profile$} from "./profile"
 import {ReasonKey, reasons, dateStr, timeStr} from "./reasons"
 import Loader from "./loader"
 
-let lastPdf: string
+export type PDF =
+  | {
+      isReady: false
+    }
+  | {
+      isReady: true
+      isGenerated: false
+    }
+  | {
+      isReady: true
+      isGenerated: true
+      data: string
+    }
+
+export const pdf$ = new BehaviorSubject<PDF>({isReady: false})
+
+AsyncStorage.getItem("pdf").then(data =>
+  pdf$.next(
+    data
+      ? {
+          isReady: true,
+          isGenerated: true,
+          data,
+        }
+      : {
+          isReady: true,
+          isGenerated: false,
+        },
+  ),
+)
 
 function idealFontSize(
   font: PDFFont,
@@ -134,10 +165,11 @@ const s = StyleSheet.create({
   headerButton: {padding: 10, marginRight: 5},
 })
 
-const PDFScreen: NavigationStackScreenComponent = () => {
+const PDFScreen: NavigationStackScreenComponent = props => {
   const now = DateTime.local()
+  const shouldReset = Boolean((props.navigation.state.params || {}).reset)
   const [profile] = useBehaviorSubject(profile$)
-  const [pdf, setPdf] = useState<string | null>(null)
+  const [pdf] = useBehaviorSubject(pdf$)
   const qrCodeData = [
     `Cree le: ${now.toFormat(DATE_FMT)} a ${now.toFormat(TIME_FMT)}`,
     `Nom: ${profile.lastName}`,
@@ -151,22 +183,25 @@ const PDFScreen: NavigationStackScreenComponent = () => {
   ].join(";\n ")
 
   function qrCodeDataURLHandler(qrCodeDataURL: string) {
-    generatePdf(profile, reasons, qrCodeDataURL.replace(/(\r\n|\n|\r)/gm, "")).then(pdf => {
-      setPdf(pdf)
-      lastPdf = pdf
+    generatePdf(profile, reasons, qrCodeDataURL.replace(/(\r\n|\n|\r)/gm, "")).then(data => {
+      pdf$.next({isReady: true, isGenerated: true, data})
+      AsyncStorage.setItem("pdf", data)
     })
   }
 
   useEffect(() => {
-    lastPdf = ""
-  }, [])
+    if (shouldReset) {
+      AsyncStorage.removeItem("pdf")
+      pdf$.next({isReady: true, isGenerated: false})
+    }
+  }, [shouldReset])
 
   return (
     <View style={s.container}>
-      {pdf ? (
+      {pdf.isReady && pdf.isGenerated ? (
         <Pdf
           activityIndicator={<Loader />}
-          source={{uri: "data:application/pdf;base64," + pdf}}
+          source={{uri: "data:application/pdf;base64," + pdf.data}}
           style={s.pdf}
         />
       ) : (
@@ -188,7 +223,10 @@ const PDFScreen: NavigationStackScreenComponent = () => {
 PDFScreen.navigationOptions = () => ({
   title: "Attestation",
   headerRight: () => (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => lastPdf && download(lastPdf)}>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={() => pdf$.value.isReady && pdf$.value.isGenerated && download(pdf$.value.data)}
+    >
       <Text style={s.headerButton}>Télécharger</Text>
     </TouchableOpacity>
   ),

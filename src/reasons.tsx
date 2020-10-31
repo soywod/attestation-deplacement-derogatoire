@@ -38,7 +38,7 @@ export const reasonKeys: ReasonKey[] = [
   "enfants",
 ]
 
-export let reasons: ReasonKey[]
+export let reasons: ReasonKey[] = []
 export let dateStr: string
 export let timeStr: string
 
@@ -118,7 +118,7 @@ const ReasonsScreen: NavigationStackScreenComponent = props => {
     reasons = reasonKeys.filter(key => reasonsMap.current[key])
     dateStr = dateStr || now.toFormat(DATE_FMT)
     timeStr = timeStr || now.toFormat(TIME_FMT)
-    props.navigation.navigate("PDFScreen")
+    props.navigation.navigate("PDFScreen", {reset: true})
   }
 
   function setDateStr(date?: DateTime) {
