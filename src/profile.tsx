@@ -1,23 +1,23 @@
-import React, {FC, useEffect, useState} from "react"
-import {BehaviorSubject} from "rxjs"
-import useObservable from "@soywod/react-use-observable"
-import {Alert, Button, ScrollView, StyleSheet, TextInput, View} from "react-native"
-import {NavigationStackScreenComponent} from "react-navigation-stack"
-import AsyncStorage from "@react-native-community/async-storage"
-import {DateTime} from "luxon"
+import React, {FC, useEffect, useState} from "react";
+import {BehaviorSubject} from "rxjs";
+import useObservable from "@soywod/react-use-observable";
+import {Alert, Button, ScrollView, StyleSheet, TextInput, View} from "react-native";
+import {NavigationStackScreenComponent} from "react-navigation-stack";
+import AsyncStorage from "@react-native-community/async-storage";
+import {DateTime} from "luxon";
 
-import DateTimePicker from "./datetime-picker"
+import DateTimePicker from "./datetime-picker";
 
 export type Profile = {
-  firstName: string
-  lastName: string
-  dateOfBirth: string
-  placeOfBirth: string
-  address: string
-  city: string
-  zip: string
-  isReady: boolean
-}
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  placeOfBirth: string;
+  address: string;
+  city: string;
+  zip: string;
+  isReady: boolean;
+};
 
 export const defaultProfile: Profile = {
   firstName: "",
@@ -28,25 +28,25 @@ export const defaultProfile: Profile = {
   city: "",
   zip: "",
   isReady: false,
-}
+};
 
-export const profile$ = new BehaviorSubject(defaultProfile)
+export const profile$ = new BehaviorSubject(defaultProfile);
 
 AsyncStorage.getItem("profile")
   .then(str => JSON.parse(String(str || null)))
   .then(maybeProfile => maybeProfile || defaultProfile)
-  .then(profile => profile$.next(Object.assign(profile, {isReady: true})))
+  .then(profile => profile$.next(Object.assign(profile, {isReady: true})));
 
 export function isProfileComplete(profile: Profile) {
-  if (!profile) return false
-  if (!profile.firstName) return false
-  if (!profile.lastName) return false
-  if (!profile.dateOfBirth) return false
-  if (!profile.placeOfBirth) return false
-  if (!profile.address) return false
-  if (!profile.city) return false
-  if (!profile.zip) return false
-  return true
+  if (!profile) return false;
+  if (!profile.firstName) return false;
+  if (!profile.lastName) return false;
+  if (!profile.dateOfBirth) return false;
+  if (!profile.placeOfBirth) return false;
+  if (!profile.address) return false;
+  if (!profile.city) return false;
+  if (!profile.zip) return false;
+  return true;
 }
 
 const s = StyleSheet.create({
@@ -68,13 +68,13 @@ const s = StyleSheet.create({
     borderColor: "#e8e8e8",
     borderRadius: 4,
   },
-})
+});
 
 const ProfileScreen: NavigationStackScreenComponent = props => {
-  const [profile, setProfile] = useState(defaultProfile)
+  const [profile, setProfile] = useState(defaultProfile);
 
   function nextStep() {
-    const nextProfile: Profile = Object.assign({}, defaultProfile, profile)
+    const nextProfile: Profile = Object.assign({}, defaultProfile, profile);
 
     if (!isProfileComplete(nextProfile)) {
       return Alert.alert(
@@ -82,12 +82,12 @@ const ProfileScreen: NavigationStackScreenComponent = props => {
         "Vous devez remplir tous les champs pour pouvoir générer une attestation de déplacement dérogatoire.",
         [{text: "OK"}],
         {cancelable: false},
-      )
+      );
     }
 
-    props.navigation.goBack()
-    profile$.next(nextProfile)
-    AsyncStorage.setItem("profile", JSON.stringify(nextProfile))
+    props.navigation.goBack();
+    profile$.next(nextProfile);
+    AsyncStorage.setItem("profile", JSON.stringify(nextProfile));
   }
 
   return (
@@ -99,23 +99,23 @@ const ProfileScreen: NavigationStackScreenComponent = props => {
         <Button title="Sauvegarder" onPress={nextStep} />
       </View>
     </View>
-  )
-}
+  );
+};
 
 ProfileScreen.navigationOptions = () => ({
   title: "Profil",
-})
+});
 
 export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
-  const updateProfile = props.onChange
-  const [profile] = useObservable(profile$, profile$.value)
-  const [firstName, setFirstName] = useState(profile.firstName)
-  const [lastName, setLastName] = useState(profile.lastName)
-  const [dateOfBirth, setDateOfBirth] = useState(profile.dateOfBirth)
-  const [placeOfBirth, setPlaceOfBirth] = useState(profile.placeOfBirth)
-  const [address, setAddress] = useState(profile.address)
-  const [city, setCity] = useState(profile.city)
-  const [zip, setZip] = useState(profile.zip)
+  const updateProfile = props.onChange;
+  const [profile] = useObservable(profile$, profile$.value);
+  const [firstName, setFirstName] = useState(profile.firstName);
+  const [lastName, setLastName] = useState(profile.lastName);
+  const [dateOfBirth, setDateOfBirth] = useState(profile.dateOfBirth);
+  const [placeOfBirth, setPlaceOfBirth] = useState(profile.placeOfBirth);
+  const [address, setAddress] = useState(profile.address);
+  const [city, setCity] = useState(profile.city);
+  const [zip, setZip] = useState(profile.zip);
 
   useEffect(() => {
     updateProfile(
@@ -128,8 +128,8 @@ export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
         city,
         zip,
       }),
-    )
-  }, [address, city, dateOfBirth, firstName, lastName, placeOfBirth, profile, updateProfile, zip])
+    );
+  }, [address, city, dateOfBirth, firstName, lastName, placeOfBirth, profile, updateProfile, zip]);
 
   return (
     <>
@@ -187,7 +187,7 @@ export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
         />
       </View>
     </>
-  )
-}
+  );
+};
 
-export default ProfileScreen
+export default ProfileScreen;

@@ -1,10 +1,10 @@
-import React, {FC, useRef, useState} from "react"
-import {Button, Platform, StyleSheet, TextInput, TouchableOpacity, View} from "react-native"
-import RNDateTimePicker from "@react-native-community/datetimepicker"
-import {DateTime} from "luxon"
+import React, {FC, useRef, useState} from "react";
+import {Button, Platform, StyleSheet, TextInput, TouchableOpacity, View} from "react-native";
+import RNDateTimePicker from "@react-native-community/datetimepicker";
+import {DateTime} from "luxon";
 
-export const DATE_FMT = "dd/MM/yyyy"
-export const TIME_FMT = "HH'h'mm"
+export const DATE_FMT = "dd/MM/yyyy";
+export const TIME_FMT = "HH'h'mm";
 
 const s = StyleSheet.create({
   input: {
@@ -18,21 +18,21 @@ const s = StyleSheet.create({
     borderColor: "#e8e8e8",
     borderRadius: 4,
   },
-})
+});
 
 type DatetimeProps = {
-  type: "date" | "time"
-  defaultValue?: DateTime
-  placeholder?: string
-  onChange: (date?: DateTime) => void
-}
+  type: "date" | "time";
+  defaultValue?: DateTime;
+  placeholder?: string;
+  onChange: (date?: DateTime) => void;
+};
 
 export const DateTimePicker: FC<DatetimeProps> = props => {
-  const now = DateTime.local()
-  const [dateTime, setDateTime] = useState(props.defaultValue)
-  const dateTimeRef = useRef<TextInput | null>(null)
-  const [isPickerVisible, setPickerVisible] = useState(false)
-  const format = props.type === "date" ? DATE_FMT : TIME_FMT
+  const now = DateTime.local();
+  const [dateTime, setDateTime] = useState(props.defaultValue);
+  const dateTimeRef = useRef<TextInput | null>(null);
+  const [isPickerVisible, setPickerVisible] = useState(false);
+  const format = props.type === "date" ? DATE_FMT : TIME_FMT;
 
   return (
     <>
@@ -54,9 +54,9 @@ export const DateTimePicker: FC<DatetimeProps> = props => {
             display="spinner"
             value={(dateTime || now).toJSDate()}
             onChange={(_, date) => {
-              Platform.OS === "android" && setPickerVisible(false)
-              setDateTime(date ? DateTime.fromJSDate(date) : undefined)
-              props.onChange(date ? DateTime.fromJSDate(date) : undefined)
+              Platform.OS === "android" && setPickerVisible(false);
+              setDateTime(date ? DateTime.fromJSDate(date) : undefined);
+              props.onChange(date ? DateTime.fromJSDate(date) : undefined);
             }}
           />
           {Platform.OS === "ios" && (
@@ -65,7 +65,7 @@ export const DateTimePicker: FC<DatetimeProps> = props => {
         </>
       )}
     </>
-  )
-}
+  );
+};
 
-export default DateTimePicker
+export default DateTimePicker;

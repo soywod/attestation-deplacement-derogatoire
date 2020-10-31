@@ -1,9 +1,9 @@
-import React, {useState} from "react"
-import {Alert, Button, ScrollView, StyleSheet, Text, View} from "react-native"
-import {NavigationStackScreenComponent} from "react-navigation-stack"
-import AsyncStorage from "@react-native-community/async-storage"
+import React, {useState} from "react";
+import {Alert, Button, ScrollView, StyleSheet, Text, View} from "react-native";
+import {NavigationStackScreenComponent} from "react-navigation-stack";
+import AsyncStorage from "@react-native-community/async-storage";
 
-import {ProfileForm, profile$, isProfileComplete} from "./profile"
+import {ProfileForm, profile$, isProfileComplete} from "./profile";
 
 const s = StyleSheet.create({
   container: {height: "100%"},
@@ -11,10 +11,10 @@ const s = StyleSheet.create({
   paragraph: {marginBottom: 10},
   subParagraph: {marginBottom: 20, opacity: 0.25, fontStyle: "italic"},
   footer: {height: "auto", padding: 10},
-})
+});
 
 const ProfileInitScreen: NavigationStackScreenComponent = props => {
-  const [profile, setProfile] = useState(profile$.value)
+  const [profile, setProfile] = useState(profile$.value);
 
   function saveProfile() {
     if (!isProfileComplete(profile)) {
@@ -23,12 +23,12 @@ const ProfileInitScreen: NavigationStackScreenComponent = props => {
         "Vous devez remplir tous les champs pour pouvoir générer une attestation de déplacement dérogatoire.",
         [{text: "OK"}],
         {cancelable: false},
-      )
+      );
     }
 
-    props.navigation.replace("ReasonsScreen")
-    profile$.next(profile)
-    AsyncStorage.setItem("profile", JSON.stringify(profile))
+    props.navigation.replace("ReasonsScreen");
+    profile$.next(profile);
+    AsyncStorage.setItem("profile", JSON.stringify(profile));
   }
 
   return (
@@ -48,11 +48,11 @@ const ProfileInitScreen: NavigationStackScreenComponent = props => {
         <Button title="Suivant" onPress={saveProfile} />
       </View>
     </View>
-  )
-}
+  );
+};
 
 ProfileInitScreen.navigationOptions = () => ({
   title: "Bienvenue",
-})
+});
 
-export default ProfileInitScreen
+export default ProfileInitScreen;

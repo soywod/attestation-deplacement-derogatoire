@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from "react"
+import React, {FC, useEffect, useRef, useState} from "react";
 import {
   Button,
   GestureResponderEvent,
@@ -8,11 +8,11 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native"
-import {NavigationStackScreenComponent} from "react-navigation-stack"
-import {DateTime} from "luxon"
+} from "react-native";
+import {NavigationStackScreenComponent} from "react-navigation-stack";
+import {DateTime} from "luxon";
 
-import DateTimePicker, {DATE_FMT, TIME_FMT} from "./datetime-picker"
+import DateTimePicker, {DATE_FMT, TIME_FMT} from "./datetime-picker";
 
 export type ReasonKey =
   | "travail"
@@ -23,7 +23,7 @@ export type ReasonKey =
   | "sport_animaux"
   | "convocation"
   | "missions"
-  | "enfants"
+  | "enfants";
 
 export const reasonKeys: ReasonKey[] = [
   "travail",
@@ -35,11 +35,11 @@ export const reasonKeys: ReasonKey[] = [
   "convocation",
   "missions",
   "enfants",
-]
+];
 
-export let reasons: ReasonKey[] = []
-export let dateStr: string
-export let timeStr: string
+export let reasons: ReasonKey[] = [];
+export let dateStr: string;
+export let timeStr: string;
 
 const s = StyleSheet.create({
   container: {height: "100%"},
@@ -53,7 +53,7 @@ const s = StyleSheet.create({
   link: {color: "blue", textDecorationLine: "underline"},
   loader: {flex: 1},
   headerButton: {padding: 10, marginRight: 5},
-})
+});
 
 const allReasons: {[key in ReasonKey]: JSX.Element} = {
   travail: (
@@ -107,25 +107,25 @@ const allReasons: {[key in ReasonKey]: JSX.Element} = {
       périscolaires.
     </Text>
   ),
-}
+};
 
 const ReasonsScreen: NavigationStackScreenComponent = props => {
-  const reasonsMap = useRef<Partial<{[key in ReasonKey]: boolean}>>({})
+  const reasonsMap = useRef<Partial<{[key in ReasonKey]: boolean}>>({});
 
   function nextStep() {
-    const now = DateTime.local()
-    reasons = reasonKeys.filter(key => reasonsMap.current[key])
-    dateStr = dateStr || now.toFormat(DATE_FMT)
-    timeStr = timeStr || now.toFormat(TIME_FMT)
-    props.navigation.navigate("PDFScreen", {reset: true})
+    const now = DateTime.local();
+    reasons = reasonKeys.filter(key => reasonsMap.current[key]);
+    dateStr = dateStr || now.toFormat(DATE_FMT);
+    timeStr = timeStr || now.toFormat(TIME_FMT);
+    props.navigation.navigate("PDFScreen", {reset: true});
   }
 
   function setDateStr(date?: DateTime) {
-    dateStr = (date || DateTime.local()).toFormat(DATE_FMT)
+    dateStr = (date || DateTime.local()).toFormat(DATE_FMT);
   }
 
   function setTimeStr(date?: DateTime) {
-    timeStr = (date || DateTime.local()).toFormat(TIME_FMT)
+    timeStr = (date || DateTime.local()).toFormat(TIME_FMT);
   }
 
   return (
@@ -151,23 +151,23 @@ const ReasonsScreen: NavigationStackScreenComponent = props => {
         <Button title="Suivant" onPress={nextStep} />
       </View>
     </View>
-  )
-}
+  );
+};
 
 type ReasonProps = {
-  onToggle: (val: boolean) => void
-}
+  onToggle: (val: boolean) => void;
+};
 
 const Reason: FC<ReasonProps> = props => {
-  const [isOn, toggle] = useState(false)
+  const [isOn, toggle] = useState(false);
 
   useEffect(() => {
-    props.onToggle(isOn)
-  }, [isOn, props])
+    props.onToggle(isOn);
+  }, [isOn, props]);
 
   function handlePress(evt: GestureResponderEvent) {
-    evt.preventDefault()
-    toggle(!isOn)
+    evt.preventDefault();
+    toggle(!isOn);
   }
 
   return (
@@ -179,8 +179,8 @@ const Reason: FC<ReasonProps> = props => {
         <Text style={s.reasonText}>{props.children}</Text>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
 ReasonsScreen.navigationOptions = props => ({
   title: "Motif(s)",
@@ -192,6 +192,6 @@ ReasonsScreen.navigationOptions = props => ({
       <Text style={s.headerButton}>Profil</Text>
     </TouchableOpacity>
   ),
-})
+});
 
-export default ReasonsScreen
+export default ReasonsScreen;
