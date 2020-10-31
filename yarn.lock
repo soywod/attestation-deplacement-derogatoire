@@ -5659,6 +5659,11 @@ react-native-gesture-handler@^1.6.1:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-in-app-review@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-in-app-review/-/react-native-in-app-review-2.1.2.tgz#8697e655a6cedab44a62f97de0a2048035aadbfa"
+  integrity sha512-HwDJ7X80tFEDC4+EMQK9dI9UymZVijMZmMXOaXFUgR9pkGLKfx96rWNzD6drA5Z/M8de8ehnCZ1/6OPE6yst4A==
+
 react-native-iphone-x-helper@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.0.tgz#84fd13e6b89cc3aa4daa80ec514bf15cb724d86d"

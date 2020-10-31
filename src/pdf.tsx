@@ -16,6 +16,7 @@ import RNFS from "react-native-fs";
 import FileViewer from "react-native-file-viewer";
 import QRCode from "react-native-qrcode-svg";
 import Pdf from "react-native-pdf";
+import InAppReview from "react-native-in-app-review";
 import useObservable from "@soywod/react-use-observable";
 import {DateTime} from "luxon";
 import {PDFDocument, StandardFonts, PDFFont} from "pdf-lib";
@@ -195,6 +196,17 @@ const PDFScreen: NavigationStackScreenComponent = props => {
       pdf$.next({isReady: true, isGenerated: false});
     }
   }, [shouldReset]);
+
+  useEffect(() => {
+    if (pdf.isReady && pdf.isGenerated) {
+      AsyncStorage.getItem("has-review-been-asked").then(hasReviewBeenAsked => {
+        if (!hasReviewBeenAsked && InAppReview.isAvailable()) {
+          InAppReview.RequestInAppReview();
+          AsyncStorage.setItem("has-review-been-asked", "true");
+        }
+      });
+    }
+  }, [pdf]);
 
   return (
     <View style={s.container}>
