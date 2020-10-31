@@ -49,7 +49,7 @@ async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: strin
   const {lastName, firstName, dateOfBirth, placeOfBirth, address, city, zip} = profile
   const readFile = Platform.OS === "android" ? RNFS.readFileAssets : RNFS.readFile
   const tplPath = Platform.OS === "android" ? "" : RNFS.MainBundlePath + "/"
-  const existingPdfBytes = await readFile(tplPath + "template-v2.pdf", "base64")
+  const existingPdfBytes = await readFile(tplPath + "template-v3.pdf", "base64")
 
   const pdfDoc = await PDFDocument.load(existingPdfBytes)
   const page1 = pdfDoc.getPages()[0]
@@ -64,15 +64,15 @@ async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: strin
   drawText(placeOfBirth, 320, 674)
   drawText(`${address}, ${zip} ${city}`, 135, 652)
 
-  reasons.includes("work") && drawText("×", 82, 578, 20)
-  reasons.includes("food") && drawText("×", 82, 533, 20)
-  reasons.includes("health") && drawText("×", 82, 477, 20)
-  reasons.includes("family") && drawText("×", 82, 436, 20)
-  reasons.includes("handicap") && drawText("×", 82, 395, 20)
-  reasons.includes("sport") && drawText("×", 82, 357, 20)
-  reasons.includes("judicial") && drawText("×", 82, 294, 20)
-  reasons.includes("missions") && drawText("×", 82, 255, 20)
-  reasons.includes("children") && drawText("×", 82, 210, 20)
+  reasons.includes("work") && drawText("×", 77, 577, 20)
+  reasons.includes("food") && drawText("×", 77, 532, 20)
+  reasons.includes("health") && drawText("×", 77, 476, 20)
+  reasons.includes("family") && drawText("×", 77, 435, 20)
+  reasons.includes("handicap") && drawText("×", 77, 394, 20)
+  reasons.includes("sport") && drawText("×", 77, 356, 20)
+  reasons.includes("judicial") && drawText("×", 77, 293, 20)
+  reasons.includes("missions") && drawText("×", 77, 254, 20)
+  reasons.includes("children") && drawText("×", 77, 209, 20)
 
   let locationSize = idealFontSize(font, city, 83, 7, 11)
 

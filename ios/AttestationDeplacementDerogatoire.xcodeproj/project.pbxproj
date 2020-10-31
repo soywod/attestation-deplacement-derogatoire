@@ -17,7 +17,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* AttestationDeplacementDerogatoireTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AttestationDeplacementDerogatoireTests.m */; };
 		4B227B6298B3011E17DCA5BF /* libPods-AttestationDeplacementDerogatoire-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D1AC35BABA24E4BE91BE7D /* libPods-AttestationDeplacementDerogatoire-tvOS.a */; };
-		5E491C802444836E008ACD1F /* template-v2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5E491C7F2444836E008ACD1F /* template-v2.pdf */; };
+		5E491C802444836E008ACD1F /* template-v3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5E491C7F2444836E008ACD1F /* template-v3.pdf */; };
 		66AC7762805B7EA5C9DD2EC6 /* libPods-AttestationDeplacementDerogatoire-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F777276AC7535068E98BCB /* libPods-AttestationDeplacementDerogatoire-tvOSTests.a */; };
 		83F2DB1DFCF99DEE2A8472AD /* libPods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 880B8D25F67A18A9C3D1B538 /* libPods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.a */; };
 		8CC39EF97A419DB9BBF39E9A /* libPods-AttestationDeplacementDerogatoire.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E28CBD35C24DC7D3FD0FC71 /* libPods-AttestationDeplacementDerogatoire.a */; };
@@ -60,7 +60,7 @@
 		2D02E47B1E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AttestationDeplacementDerogatoire-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* AttestationDeplacementDerogatoire-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AttestationDeplacementDerogatoire-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58BCFD57EE93B2DDF3C5BA14 /* Pods-AttestationDeplacementDerogatoire-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationDeplacementDerogatoire-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-AttestationDeplacementDerogatoire-tvOS/Pods-AttestationDeplacementDerogatoire-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		5E491C7F2444836E008ACD1F /* template-v2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = template-v2.pdf; sourceTree = "<group>"; };
+		5E491C7F2444836E008ACD1F /* template-v3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = template-v3.pdf; sourceTree = "<group>"; };
 		60D1AC35BABA24E4BE91BE7D /* libPods-AttestationDeplacementDerogatoire-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AttestationDeplacementDerogatoire-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		880B8D25F67A18A9C3D1B538 /* libPods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A47BAC3698CE6F40C1347A01 /* Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.release.xcconfig"; path = "Target Support Files/Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests/Pods-AttestationDeplacementDerogatoire-AttestationDeplacementDerogatoireTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				5E491C7F2444836E008ACD1F /* template-v2.pdf */,
+				5E491C7F2444836E008ACD1F /* template-v3.pdf */,
 				13B07FAE1A68108700A75B9A /* AttestationDeplacementDerogatoire */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* AttestationDeplacementDerogatoireTests */,
@@ -342,7 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E491C802444836E008ACD1F /* template-v2.pdf in Resources */,
+				5E491C802444836E008ACD1F /* template-v3.pdf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
