@@ -108,7 +108,6 @@ ProfileScreen.navigationOptions = () => ({
 
 export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
   const updateProfile = props.onChange
-  const now = DateTime.local()
   const [profile] = useBehaviorSubject(profile$)
   const [firstName, setFirstName] = useState(profile.firstName)
   const [lastName, setLastName] = useState(profile.lastName)
@@ -152,7 +151,7 @@ export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
       <DateTimePicker
         type="date"
         placeholder="Date de naissance"
-        defaultValue={dateOfBirth ? DateTime.fromISO(dateOfBirth) : now}
+        defaultValue={dateOfBirth ? DateTime.fromISO(dateOfBirth) : undefined}
         onChange={date => setDateOfBirth(date ? date.toISO() : "")}
       />
       <TextInput
