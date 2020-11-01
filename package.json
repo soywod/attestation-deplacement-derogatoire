@@ -48,6 +48,8 @@
     "@react-native-community/async-storage": "^1.9.0",
     "@react-native-community/datetimepicker": "^2.3.2",
     "@react-native-community/masked-view": "^0.1.8",
+    "@react-navigation/native": "^5.8.2",
+    "@react-navigation/stack": "^5.11.1",
     "@soywod/react-use-observable": "^0.0.1",
     "luxon": "^1.23.0",
     "pdf-lib": "^1.4.1",
@@ -63,8 +65,6 @@
     "react-native-safe-area-context": "0.6.0",
     "react-native-screens": "^2.4.0",
     "react-native-svg": "^12.1.0",
-    "react-navigation": "^4.3.7",
-    "react-navigation-stack": "^2.3.11",
     "rn-fetch-blob": "^0.12.0",
     "rxjs": "^6.5.5"
   },

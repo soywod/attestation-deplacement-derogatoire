@@ -1,12 +1,14 @@
 import React, {FC, useEffect, useState} from "react";
+import {Alert, Button, ScrollView, StyleSheet, View} from "react-native";
 import {BehaviorSubject} from "rxjs";
 import useObservable from "@soywod/react-use-observable";
-import {Alert, Button, ScrollView, StyleSheet, TextInput, View} from "react-native";
-import {NavigationStackScreenComponent} from "react-navigation-stack";
+import {useNavigation} from "@react-navigation/native";
 import AsyncStorage from "@react-native-community/async-storage";
 import {DateTime} from "luxon";
 
-import DateTimePicker from "./datetime-picker";
+import {useTheme} from "./theme";
+import DateTimeField from "./fields/datetime";
+import TextField from "./fields/text";
 
 export type Profile = {
   firstName: string;
@@ -49,29 +51,18 @@ export function isProfileComplete(profile: Profile) {
   return true;
 }
 
-const s = StyleSheet.create({
-  container: {height: "100%"},
-  content: {flex: 1, padding: 10},
-  footer: {height: "auto", padding: 10},
-  button: {paddingVertical: 10},
-  address: {display: "flex", flexDirection: "row"},
-  city: {flex: 1},
-  zip: {marginRight: 10, width: 110},
-  input: {
-    opacity: 1,
-    backgroundColor: "#ffffff",
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderWidth: 1,
-    color: "#333333",
-    borderColor: "#e8e8e8",
-    borderRadius: 4,
-  },
-});
-
-const ProfileScreen: NavigationStackScreenComponent = props => {
+const ProfileScreen: FC = () => {
+  const navigation = useNavigation();
+  const theme = useTheme();
   const [profile, setProfile] = useState(defaultProfile);
+
+  const s = StyleSheet.create({
+    container: {height: "100%", backgroundColor: theme.backgroundColor},
+    content: {flex: 1, padding: 10},
+    firstTitle: {fontSize: 20, marginBottom: 10, color: theme.primaryTextColor},
+    secondTitle: {fontSize: 20, marginTop: 20, marginBottom: 10, color: theme.primaryTextColor},
+    footer: {height: "auto", padding: 10},
+  });
 
   function nextStep() {
     const nextProfile: Profile = Object.assign({}, defaultProfile, profile);
@@ -85,7 +76,7 @@ const ProfileScreen: NavigationStackScreenComponent = props => {
       );
     }
 
-    props.navigation.goBack();
+    navigation.goBack();
     profile$.next(nextProfile);
     AsyncStorage.setItem("profile", JSON.stringify(nextProfile));
   }
@@ -96,15 +87,11 @@ const ProfileScreen: NavigationStackScreenComponent = props => {
         <ProfileForm onChange={setProfile} />
       </ScrollView>
       <View style={s.footer}>
-        <Button title="Sauvegarder" onPress={nextStep} />
+        <Button title="Sauvegarder" onPress={nextStep} color={theme.primaryColor} />
       </View>
     </View>
   );
 };
-
-ProfileScreen.navigationOptions = () => ({
-  title: "Profil",
-});
 
 export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
   const updateProfile = props.onChange;
@@ -116,6 +103,12 @@ export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
   const [address, setAddress] = useState(profile.address);
   const [city, setCity] = useState(profile.city);
   const [zip, setZip] = useState(profile.zip);
+
+  const s = StyleSheet.create({
+    address: {display: "flex", flexDirection: "row"},
+    zip: {marginRight: 10, width: 110},
+    city: {flex: 1},
+  });
 
   useEffect(() => {
     updateProfile(
@@ -133,58 +126,30 @@ export const ProfileForm: FC<{onChange: (p: Profile) => void}> = props => {
 
   return (
     <>
-      <TextInput
-        placeholder="Prénom"
-        placeholderTextColor="#d3d3d3"
-        value={firstName || ""}
-        onChangeText={setFirstName}
-        style={s.input}
-      />
-      <TextInput
-        placeholder="Nom"
-        placeholderTextColor="#d3d3d3"
-        autoCompleteType="name"
-        value={lastName || ""}
-        onChangeText={setLastName}
-        style={s.input}
-      />
-      <DateTimePicker
+      <TextField label="Prénom" value={firstName} onChangeText={setFirstName} />
+      <TextField label="Nom" autoCompleteType="name" value={lastName} onChangeText={setLastName} />
+      <DateTimeField
         type="date"
-        placeholder="Date de naissance"
-        defaultValue={dateOfBirth ? DateTime.fromISO(dateOfBirth) : undefined}
+        label="Date de naissance"
+        value={dateOfBirth ? DateTime.fromISO(dateOfBirth) : undefined}
         onChange={date => setDateOfBirth(date ? date.toISO() : "")}
       />
-      <TextInput
-        placeholder="Lieu de naissaince"
-        placeholderTextColor="#d3d3d3"
-        value={placeOfBirth || ""}
-        onChangeText={setPlaceOfBirth}
-        style={s.input}
-      />
-      <TextInput
-        placeholder="Adresse"
-        placeholderTextColor="#d3d3d3"
+      <TextField label="Lieu de naissaince" value={placeOfBirth} onChangeText={setPlaceOfBirth} />
+      <TextField
+        label="Adresse"
         autoCompleteType="street-address"
-        value={address || ""}
+        value={address}
         onChangeText={setAddress}
-        style={s.input}
       />
       <View style={s.address}>
-        <TextInput
-          placeholder="Code postal"
-          placeholderTextColor="#d3d3d3"
-          value={zip || ""}
+        <TextField
+          label="Code postal"
+          value={zip}
           keyboardType="numeric"
           onChangeText={setZip}
-          style={Object.assign({}, s.input, s.zip)}
+          containerStyle={s.zip}
         />
-        <TextInput
-          placeholder="Ville"
-          placeholderTextColor="#d3d3d3"
-          value={city || ""}
-          onChangeText={setCity}
-          style={Object.assign({}, s.input, s.city)}
-        />
+        <TextField label="Ville" value={city} onChangeText={setCity} containerStyle={s.city} />
       </View>
     </>
   );
