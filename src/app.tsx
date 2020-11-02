@@ -3,21 +3,20 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 
 import {useTheme} from "./theme";
-import InitScreen from "./init";
-import ProfileScreen from "./profile";
-import ProfileInitScreen from "./profile-init";
-import ReasonsScreen, {ReasonsScreenHeaderRight} from "./reasons";
-import PDFScreen, {PDFScreenHeaderRight} from "./pdf";
+import {InitScreen} from "./init";
+import {ShowProfilesScreen, InitPrimaryProfileScreen, EditSecondaryProfileScreen} from "./profiles";
+import {EditReasonsScreen, EditReasonsScreenHeaderRight} from "./reasons";
+import {RenderPDFScreen, RenderPDFScreenHeaderRight} from "./pdf";
 
 const {Screen, Navigator} = createStackNavigator();
 
 const App: FC = () => {
   const theme = useTheme();
 
-  const getScreenOpts = (title: string) => ({
+  const getScreenOpts = (title: string, elevation = 3) => ({
     title,
     headerTintColor: theme.primaryTextColor,
-    headerStyle: {backgroundColor: theme.headerBackgroundColor},
+    headerStyle: {backgroundColor: theme.headerBackgroundColor, elevation},
     headerRight: () => null,
   });
 
@@ -25,24 +24,33 @@ const App: FC = () => {
     <NavigationContainer>
       <Navigator initialRouteName="init">
         <Screen name="init" component={InitScreen} options={{header: () => null}} />
-        <Screen name="profile" component={ProfileScreen} options={getScreenOpts("Profil")} />
         <Screen
-          name="profile-init"
-          component={ProfileInitScreen}
+          name="show-profiles"
+          component={ShowProfilesScreen}
+          options={getScreenOpts("Profils", 0)}
+        />
+        <Screen
+          name="edit-secondary-profile"
+          component={EditSecondaryProfileScreen}
+          options={getScreenOpts("Profil secondaire")}
+        />
+        <Screen
+          name="init-primary-profile"
+          component={InitPrimaryProfileScreen}
           options={getScreenOpts("Bienvenue")}
         />
         <Screen
-          name="reasons"
-          component={ReasonsScreen}
+          name="edit-reasons"
+          component={EditReasonsScreen}
           options={{
-            ...getScreenOpts("Motif(s)"),
-            headerRight: ReasonsScreenHeaderRight,
+            ...getScreenOpts("Motifs"),
+            headerRight: EditReasonsScreenHeaderRight,
           }}
         />
         <Screen
-          name="pdf"
-          component={PDFScreen}
-          options={{...getScreenOpts("Attestation"), headerRight: PDFScreenHeaderRight}}
+          name="render-pdf"
+          component={RenderPDFScreen}
+          options={{...getScreenOpts("Attestation"), headerRight: RenderPDFScreenHeaderRight}}
         />
       </Navigator>
     </NavigationContainer>

@@ -7,6 +7,7 @@ export type UseTheme = {
   headerBackgroundColor: string;
   primaryColor: string;
   secondaryColor: string;
+  dangerColor: string;
   switchThumbColor: string;
   switchTrackColor: string;
   switchLabelColor: string;
@@ -27,6 +28,7 @@ export function useTheme(): UseTheme {
         secondaryTextColor: "#999999",
         primaryColor: "#7e57c2",
         secondaryColor: "#26a69a",
+        dangerColor: "#ef5350",
         switchThumbColor: "#484848",
         switchTrackColor: "#999999",
         switchLabelColor: "#999999",
@@ -44,6 +46,7 @@ export function useTheme(): UseTheme {
         secondaryTextColor: "#bfbfbf",
         primaryColor: "#7e57c2",
         secondaryColor: "#26a69a",
+        dangerColor: "#ef5350",
         switchThumbColor: "#ffffff",
         switchTrackColor: "#d3d3d3",
         switchLabelColor: "#888888",

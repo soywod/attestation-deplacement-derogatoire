@@ -1,5 +1,6 @@
 import React, {FC, useEffect, useRef, useState} from "react";
 import {
+  Alert,
   Button,
   GestureResponderEvent,
   ScrollView,
@@ -10,10 +11,13 @@ import {
   View,
 } from "react-native";
 import {useNavigation} from "@react-navigation/native";
+import {Picker} from "@react-native-picker/picker";
+import useObservable from "@soywod/react-use-observable";
 import {DateTime} from "luxon";
 
 import {useTheme} from "./theme";
 import DateTimeField, {DATE_FMT, TIME_FMT} from "./fields/datetime";
+import {profile$, profiles$} from "./profiles";
 
 export type ReasonKey =
   | "travail"
@@ -92,13 +96,16 @@ const allReasons: {[key in ReasonKey]: JSX.Element} = {
   ),
 };
 
-const ReasonsScreen: FC = () => {
+export const EditReasonsScreen: FC = () => {
   const now = DateTime.local();
-  const navigation = useNavigation();
   const theme = useTheme();
-  const reasonsMap = useRef<Partial<{[key in ReasonKey]: boolean}>>({});
+  const navigation = useNavigation();
+  const [profiles] = useObservable(profiles$, profiles$.value);
+  const [profile] = useObservable(profile$, profile$.value);
+  const [profileIndex, setProfileIndex] = useState(-1);
   const [date, setDate] = useState(now);
   const [time, setTime] = useState(now);
+  const reasonsMap = useRef<Partial<{[key in ReasonKey]: boolean}>>({});
 
   const s = StyleSheet.create({
     container: {height: "100%", backgroundColor: theme.backgroundColor},
@@ -109,21 +116,51 @@ const ReasonsScreen: FC = () => {
     loader: {flex: 1},
     headerButton: {padding: 10, marginRight: 5},
     reason: {textTransform: "uppercase", fontWeight: "bold"},
+    pickerLabel: {
+      color: theme.fieldLabelColor,
+    },
+    pickerContainer: {
+      width: "100%",
+      marginBottom: 10,
+      borderWidth: 1,
+      borderColor: theme.fieldBorderColor,
+      backgroundColor: theme.fieldBackgroundColor,
+      borderRadius: 4,
+      fontSize: 14,
+    },
+    picker: {
+      color: theme.primaryTextColor,
+      fontSize: 14,
+      height: 39,
+    },
+    pickerItem: {
+      fontSize: 10,
+      color: theme.primaryTextColor,
+    },
   });
 
   function nextStep() {
-    navigation.navigate("pdf", {
-      reasons: reasonKeys.filter(key => reasonsMap.current[key]),
+    const reasons = reasonKeys.filter(key => reasonsMap.current[key]);
+    if (reasons.length === 0) {
+      return Alert.alert("Erreur", "Vous devez choisir au moins un motif.", [{text: "OK"}], {
+        cancelable: false,
+      });
+    }
+
+    navigation.navigate("render-pdf", {
+      profile: profileIndex === -1 ? profile : profiles[profileIndex],
       date: date.toFormat(DATE_FMT),
       time: time.toFormat(TIME_FMT),
+      reasons,
     });
   }
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("blur", () => {
-      reasonsMap.current = {};
+      setProfileIndex(-1);
       setDate(now);
       setTime(now);
+      reasonsMap.current = {};
     });
 
     return () => {
@@ -134,6 +171,21 @@ const ReasonsScreen: FC = () => {
   return (
     <View style={s.container}>
       <ScrollView style={s.content}>
+        <Text style={s.pickerLabel}>Profil</Text>
+        <View style={s.pickerContainer}>
+          <Picker
+            mode="dialog"
+            style={s.picker}
+            itemStyle={s.pickerItem}
+            selectedValue={profileIndex}
+            onValueChange={index => setProfileIndex(Number(index))}
+          >
+            <Picker.Item label="Principal" value="-1" />
+            {profiles.map((profile, index) => (
+              <Picker.Item key={profile.label} label={profile.label} value={index} />
+            ))}
+          </Picker>
+        </View>
         <DateTimeField
           type="date"
           label="Date de sortie"
@@ -213,7 +265,7 @@ const Reason: FC<ReasonProps> = props => {
   );
 };
 
-export const ReasonsScreenHeaderRight = () => {
+export const EditReasonsScreenHeaderRight = () => {
   const navigation = useNavigation();
   const theme = useTheme();
 
@@ -222,10 +274,8 @@ export const ReasonsScreenHeaderRight = () => {
   });
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("profile")}>
-      <Text style={s.text}>Profil</Text>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("show-profiles")}>
+      <Text style={s.text}>Profils</Text>
     </TouchableOpacity>
   );
 };
-
-export default ReasonsScreen;

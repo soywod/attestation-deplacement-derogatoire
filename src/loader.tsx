@@ -1,15 +1,10 @@
 import React, {FC} from "react";
-import {ActivityIndicator, StyleSheet} from "react-native";
+import {ActivityIndicator} from "react-native";
 
 import {useTheme} from "./theme";
-const Loader: FC = () => {
+
+export const Loader: FC = () => {
   const theme = useTheme();
 
-  const s = StyleSheet.create({
-    loader: {flex: 1},
-  });
-
-  return <ActivityIndicator animating color={theme.primaryColor} size="large" style={s.loader} />;
+  return <ActivityIndicator animating color={theme.primaryColor} size="large" style={{flex: 1}} />;
 };
-
-export default Loader;

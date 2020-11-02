@@ -22,9 +22,9 @@ import {DateTime} from "luxon";
 import {PDFDocument, StandardFonts, PDFFont} from "pdf-lib";
 
 import {DATE_FMT, TIME_FMT} from "./fields/datetime";
-import {Profile, profile$} from "./profile";
+import {Profile} from "./profiles/model";
 import {ReasonKey} from "./reasons";
-import Loader from "./loader";
+import {Loader} from "./loader";
 import {useTheme} from "./theme";
 
 export type PDF =
@@ -149,29 +149,18 @@ async function generatePdf(
 type PDFScreenRouteParams = Route<
   "pdf",
   {
-    reasons: ReasonKey[];
+    profile: Profile;
     date: string;
     time: string;
+    reasons: ReasonKey[];
   }
 >;
 
-const PDFScreen: FC = () => {
+export const RenderPDFScreen: FC = () => {
   const now = DateTime.local();
-  const {reasons = [], date = "", time = ""} = useRoute<PDFScreenRouteParams>().params || {};
   const theme = useTheme();
-  const [profile] = useObservable(profile$, profile$.value);
+  const {profile, date, time, reasons = []} = useRoute<PDFScreenRouteParams>().params || {};
   const [pdf] = useObservable(pdf$, pdf$.value);
-  const qrCodeData = [
-    `Cree le: ${now.toFormat(DATE_FMT)} a ${now.toFormat(TIME_FMT)}`,
-    `Nom: ${profile.lastName}`,
-    `Prenom: ${profile.firstName}`,
-    `Naissance: ${DateTime.fromISO(profile.dateOfBirth).toFormat(DATE_FMT)} a ${
-      profile.placeOfBirth
-    }`,
-    `Adresse: ${profile.address} ${profile.zip} ${profile.city}`,
-    `Sortie: ${date} a ${time}`,
-    `Motifs: ${reasons.join(", ")}`,
-  ].join(";\n");
 
   const s = StyleSheet.create({
     container: {
@@ -194,6 +183,20 @@ const PDFScreen: FC = () => {
     },
   });
 
+  function getQRCodeData() {
+    return [
+      `Cree le: ${now.toFormat(DATE_FMT)} a ${now.toFormat(TIME_FMT)}`,
+      `Nom: ${profile.lastName}`,
+      `Prenom: ${profile.firstName}`,
+      `Naissance: ${DateTime.fromISO(profile.dateOfBirth).toFormat(DATE_FMT)} a ${
+        profile.placeOfBirth
+      }`,
+      `Adresse: ${profile.address} ${profile.zip} ${profile.city}`,
+      `Sortie: ${date} a ${time}`,
+      `Motifs: ${reasons.join(", ")}`,
+    ].join(";\n");
+  }
+
   async function qrCodeDataURLHandler(qrCodeDataURL: string) {
     const qrCode = qrCodeDataURL.replace(/(\r\n|\n|\r)/gm, "");
     const data = await generatePdf(profile, reasons, date, time, qrCode);
@@ -210,7 +213,7 @@ const PDFScreen: FC = () => {
 
   useEffect(() => {
     if (pdf.isReady && pdf.isGenerated && InAppReview.isAvailable()) {
-      setTimeout(() => InAppReview.RequestInAppReview(), 2000);
+      InAppReview.RequestInAppReview();
     }
   }, [pdf]);
 
@@ -229,7 +232,7 @@ const PDFScreen: FC = () => {
             <QRCode
               ecl="M"
               getRef={svg => svg && svg.toDataURL(qrCodeDataURLHandler)}
-              value={qrCodeData}
+              value={getQRCodeData()}
             />
           </View>
         </View>
@@ -238,7 +241,7 @@ const PDFScreen: FC = () => {
   );
 };
 
-export const PDFScreenHeaderRight = () => {
+export const RenderPDFScreenHeaderRight = () => {
   const theme = useTheme();
 
   const s = StyleSheet.create({
@@ -295,5 +298,3 @@ async function downloadAndroid(data: string) {
     ToastAndroid.show(err.message, ToastAndroid.SHORT);
   }
 }
-
-export default PDFScreen;
