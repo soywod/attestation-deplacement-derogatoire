@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import {useRoute} from "@react-navigation/native";
+import {Route, useRoute} from "@react-navigation/native";
 import AsyncStorage from "@react-native-community/async-storage";
 import RNFS from "react-native-fs";
 import FileViewer from "react-native-file-viewer";
@@ -23,7 +23,7 @@ import {PDFDocument, StandardFonts, PDFFont} from "pdf-lib";
 
 import {DATE_FMT, TIME_FMT} from "./fields/datetime";
 import {Profile, profile$} from "./profile";
-import {ReasonKey, reasons, dateStr, timeStr} from "./reasons";
+import {ReasonKey} from "./reasons";
 import Loader from "./loader";
 import {useTheme} from "./theme";
 
@@ -75,7 +75,13 @@ function idealFontSize(
   return textWidth > maxWidth ? null : currentSize;
 }
 
-async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: string) {
+async function generatePdf(
+  profile: Profile,
+  reasons: ReasonKey[],
+  date: string,
+  time: string,
+  qrcode: string,
+) {
   const {lastName, firstName, dateOfBirth, placeOfBirth, address, city, zip} = profile;
   const readFile = Platform.OS === "android" ? RNFS.readFileAssets : RNFS.readFile;
   const tplPath = Platform.OS === "android" ? "" : RNFS.MainBundlePath + "/";
@@ -115,8 +121,8 @@ async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: strin
   }
 
   drawText(profile.city, 111, 175, locationSize);
-  drawText(dateStr, 111, 153);
-  drawText(timeStr, 275, 153);
+  drawText(date, 111, 153);
+  drawText(time, 275, 153);
   drawText(`${firstName} ${lastName}`, 130, 119);
 
   const qrImage = await pdfDoc.embedPng(qrcode);
@@ -140,11 +146,19 @@ async function generatePdf(profile: Profile, reasons: ReasonKey[], qrcode: strin
   return await pdfDoc.saveAsBase64();
 }
 
+type PDFScreenRouteParams = Route<
+  "pdf",
+  {
+    reasons: ReasonKey[];
+    date: string;
+    time: string;
+  }
+>;
+
 const PDFScreen: FC = () => {
-  const route = useRoute();
-  const theme = useTheme();
   const now = DateTime.local();
-  const shouldReset = "reset" in (route.params || {});
+  const {reasons = [], date = "", time = ""} = useRoute<PDFScreenRouteParams>().params || {};
+  const theme = useTheme();
   const [profile] = useObservable(profile$, profile$.value);
   const [pdf] = useObservable(pdf$, pdf$.value);
   const qrCodeData = [
@@ -155,9 +169,9 @@ const PDFScreen: FC = () => {
       profile.placeOfBirth
     }`,
     `Adresse: ${profile.address} ${profile.zip} ${profile.city}`,
-    `Sortie: ${dateStr} a ${timeStr}`,
+    `Sortie: ${date} a ${time}`,
     `Motifs: ${reasons.join(", ")}`,
-  ].join(";\n ");
+  ].join(";\n");
 
   const s = StyleSheet.create({
     container: {
@@ -180,28 +194,23 @@ const PDFScreen: FC = () => {
     },
   });
 
-  function qrCodeDataURLHandler(qrCodeDataURL: string) {
-    generatePdf(profile, reasons, qrCodeDataURL.replace(/(\r\n|\n|\r)/gm, "")).then(data => {
-      pdf$.next({isReady: true, isGenerated: true, data});
-      AsyncStorage.setItem("pdf", data);
-    });
+  async function qrCodeDataURLHandler(qrCodeDataURL: string) {
+    const qrCode = qrCodeDataURL.replace(/(\r\n|\n|\r)/gm, "");
+    const data = await generatePdf(profile, reasons, date, time, qrCode);
+    pdf$.next({isReady: true, isGenerated: true, data});
+    AsyncStorage.setItem("pdf", data);
   }
 
   useEffect(() => {
-    if (shouldReset) {
+    if (reasons.length > 0) {
       AsyncStorage.removeItem("pdf");
       pdf$.next({isReady: true, isGenerated: false});
     }
-  }, [shouldReset]);
+  }, [reasons.length]);
 
   useEffect(() => {
-    if (pdf.isReady && pdf.isGenerated) {
-      AsyncStorage.getItem("has-review-been-asked").then(hasReviewBeenAsked => {
-        if (!hasReviewBeenAsked && InAppReview.isAvailable()) {
-          InAppReview.RequestInAppReview();
-          AsyncStorage.setItem("has-review-been-asked", "true");
-        }
-      });
+    if (pdf.isReady && pdf.isGenerated && InAppReview.isAvailable()) {
+      setTimeout(() => InAppReview.RequestInAppReview(), 2000);
     }
   }, [pdf]);
 
@@ -279,7 +288,7 @@ async function downloadAndroid(data: string) {
       const now = DateTime.local().toFormat("yyyy-MM-dd-HH-mm");
       const path = RNFS.DownloadDirectoryPath + `/attestation-${now}.pdf`;
       await RNFS.writeFile(path, data, "base64");
-      ToastAndroid.show("Attestation téléchargée dans le dossier Download.", ToastAndroid.SHORT);
+      ToastAndroid.show("Attestation téléchargée dans le dossier Download.", ToastAndroid.LONG);
       return path;
     }
   } catch (err) {

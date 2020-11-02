@@ -38,10 +38,6 @@ export const reasonKeys: ReasonKey[] = [
   "enfants",
 ];
 
-export let reasons: ReasonKey[] = [];
-export let dateStr: string;
-export let timeStr: string;
-
 const allReasons: {[key in ReasonKey]: JSX.Element} = {
   travail: (
     <Text>
@@ -116,11 +112,24 @@ const ReasonsScreen: FC = () => {
   });
 
   function nextStep() {
-    reasons = reasonKeys.filter(key => reasonsMap.current[key]);
-    dateStr = date.toFormat(DATE_FMT);
-    timeStr = time.toFormat(TIME_FMT);
-    navigation.navigate("pdf", {reset: true});
+    navigation.navigate("pdf", {
+      reasons: reasonKeys.filter(key => reasonsMap.current[key]),
+      date: date.toFormat(DATE_FMT),
+      time: time.toFormat(TIME_FMT),
+    });
   }
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("blur", () => {
+      reasonsMap.current = {};
+      setDate(now);
+      setTime(now);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigation, now]);
 
   return (
     <View style={s.container}>
@@ -158,6 +167,7 @@ type ReasonProps = {
 
 const Reason: FC<ReasonProps> = props => {
   const theme = useTheme();
+  const navigation = useNavigation();
   const [isOn, toggle] = useState(false);
 
   const s = StyleSheet.create({
@@ -170,6 +180,16 @@ const Reason: FC<ReasonProps> = props => {
   useEffect(() => {
     props.onToggle(isOn);
   }, [isOn, props]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("blur", () => {
+      toggle(false);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigation]);
 
   function handlePress(evt: GestureResponderEvent) {
     evt.preventDefault();
