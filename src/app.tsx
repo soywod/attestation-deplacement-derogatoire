@@ -8,6 +8,8 @@ import {ShowProfilesScreen, InitPrimaryProfileScreen, EditSecondaryProfileScreen
 import {EditReasonsScreen, EditReasonsScreenHeaderRight} from "./reasons";
 import {RenderPDFScreen, RenderPDFScreenHeaderRight} from "./pdf";
 
+import "./error-handler";
+
 const {Screen, Navigator} = createStackNavigator();
 
 const App: FC = () => {

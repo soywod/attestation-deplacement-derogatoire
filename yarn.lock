@@ -5659,6 +5659,11 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.7.0, react-is@^16.8.1, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-exception-handler@^2.10.9:
+  version "2.10.9"
+  resolved "https://registry.yarnpkg.com/react-native-exception-handler/-/react-native-exception-handler-2.10.9.tgz#4935a9e106b02ebecc729bfaac8ac8e6b0340781"
+  integrity sha512-V1SJWHzhGUnFWTQKK5dk9yz+Ybkl1wSFWgY6saPkZomYiB9120FdeejJ5NdAio1sH75+op9RpC1w9KbHg+1zFA==
+
 react-native-file-viewer@^2.0.2:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/react-native-file-viewer/-/react-native-file-viewer-2.1.4.tgz#987b2902f0f0ac87b42f3ac3d3037c8ae98f17a6"
