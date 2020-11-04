@@ -21,8 +21,8 @@ import useObservable from "@soywod/react-use-observable";
 import {DateTime} from "luxon";
 import {PDFDocument, StandardFonts, PDFFont} from "pdf-lib";
 
-import {DATE_FMT, TIME_FMT} from "./fields/datetime";
-import {Profile} from "./profiles/model";
+import {DATE_FMT, TIME_FMT} from "./field/datetime";
+import {Profile} from "./profile";
 import {ReasonKey} from "./reasons";
 import {Loader} from "./loader";
 import {useTheme} from "./theme";

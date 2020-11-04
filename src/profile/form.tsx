@@ -3,8 +3,8 @@ import {StyleSheet, View} from "react-native";
 import {DateTime} from "luxon";
 
 import {Profile, isSecondaryProfile} from "./model";
-import DateTimeField from "../fields/datetime";
-import TextField from "../fields/text";
+import {DateTimeField} from "../field/datetime";
+import {TextField} from "../field/text";
 
 type ProfileFormProps = {
   profile: Profile;
@@ -62,6 +62,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({profile, onChange: triggerCha
       <TextField label="Nom" autoCompleteType="name" value={lastName} onChangeText={setLastName} />
       <DateTimeField
         type="date"
+        display="spinner"
         label="Date de naissance"
         value={dateOfBirth ? DateTime.fromISO(dateOfBirth) : undefined}
         onChange={date => setDateOfBirth(date ? date.toISO() : "")}

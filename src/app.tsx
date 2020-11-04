@@ -4,7 +4,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 
 import {useTheme} from "./theme";
 import {InitScreen} from "./init";
-import {ShowProfilesScreen, InitPrimaryProfileScreen, EditSecondaryProfileScreen} from "./profiles";
+import {ShowProfilesScreen, InitPrimaryProfileScreen, EditSecondaryProfileScreen} from "./profile";
 import {EditReasonsScreen, EditReasonsScreenHeaderRight} from "./reasons";
 import {RenderPDFScreen, RenderPDFScreenHeaderRight} from "./pdf";
 

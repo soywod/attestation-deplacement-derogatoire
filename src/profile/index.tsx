@@ -32,6 +32,6 @@ export const ShowProfilesScreen: FC = () => {
   );
 };
 
-export {isProfileValid} from "./model";
-export {profile$, InitPrimaryProfileScreen} from "./primary";
-export {profiles$, EditSecondaryProfileScreen} from "./secondary";
+export * from "./model";
+export * from "./primary";
+export * from "./secondary";

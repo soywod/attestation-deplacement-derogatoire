@@ -1,6 +1,16 @@
 import React, {FC, useState} from "react";
-import {Text, Button, Platform, StyleSheet, TextInput, TouchableOpacity, View} from "react-native";
-import RNDateTimePicker from "@react-native-community/datetimepicker";
+import {
+  Text,
+  Button,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
+import RNDateTimePicker, {DatePickerOptions} from "@react-native-community/datetimepicker";
 import {DateTime} from "luxon";
 
 import {useTheme} from "../theme";
@@ -8,11 +18,13 @@ import {useTheme} from "../theme";
 export const DATE_FMT = "dd/MM/yyyy";
 export const TIME_FMT = "HH'h'mm";
 
-type DateTimeFieldProps = {
+export type DateTimeFieldProps = {
   type: "date" | "time";
+  display?: DatePickerOptions["display"];
   label?: string;
   value?: DateTime;
   onChange: (date?: DateTime) => void;
+  style?: StyleProp<ViewStyle>;
 };
 
 export const DateTimeField: FC<DateTimeFieldProps> = props => {
@@ -41,7 +53,11 @@ export const DateTimeField: FC<DateTimeFieldProps> = props => {
 
   return (
     <>
-      <TouchableOpacity activeOpacity={0.75} onPress={() => setPickerVisible(!isPickerVisible)}>
+      <TouchableOpacity
+        activeOpacity={0.75}
+        onPress={() => setPickerVisible(!isPickerVisible)}
+        style={props.style}
+      >
         <View pointerEvents="none">
           {props.label && <Text style={s.label}>{props.label}</Text>}
           <TextInput value={textFieldValue} editable={false} style={s.field} />
@@ -51,7 +67,7 @@ export const DateTimeField: FC<DateTimeFieldProps> = props => {
         <>
           <RNDateTimePicker
             mode={props.type}
-            display="spinner"
+            display={props.display}
             value={(props.value || now).toJSDate()}
             onChange={(_, date) => {
               Platform.OS === "android" && setPickerVisible(false);
@@ -66,5 +82,3 @@ export const DateTimeField: FC<DateTimeFieldProps> = props => {
     </>
   );
 };
-
-export default DateTimeField;

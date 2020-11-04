@@ -5,7 +5,6 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "esModuleInterop": true,
-    "isolatedModules": true,
     "jsx": "react-native",
     "lib": ["es6"],
     "module": "commonjs",

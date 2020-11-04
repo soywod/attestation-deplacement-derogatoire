@@ -16,8 +16,8 @@ import useObservable from "@soywod/react-use-observable";
 import {DateTime} from "luxon";
 
 import {useTheme} from "./theme";
-import DateTimeField, {DATE_FMT, TIME_FMT} from "./fields/datetime";
-import {profile$, profiles$} from "./profiles";
+import {DateTimeField, DATE_FMT, TIME_FMT} from "./field/datetime";
+import {profile$, profiles$} from "./profile";
 
 export type ReasonKey =
   | "travail"
@@ -116,6 +116,9 @@ export const EditReasonsScreen: FC = () => {
     loader: {flex: 1},
     headerButton: {padding: 10, marginRight: 5},
     reason: {textTransform: "uppercase", fontWeight: "bold"},
+    dateTimeContainer: {flexDirection: "row", marginBottom: 10},
+    date: {flex: 1, marginRight: 5},
+    time: {flex: 1, marginLeft: 5},
     pickerLabel: {
       color: theme.fieldLabelColor,
     },
@@ -186,18 +189,22 @@ export const EditReasonsScreen: FC = () => {
             ))}
           </Picker>
         </View>
-        <DateTimeField
-          type="date"
-          label="Date de sortie"
-          value={date}
-          onChange={d => setDate(d || date)}
-        />
-        <DateTimeField
-          type="time"
-          label="Heure de sortie"
-          value={time}
-          onChange={t => setTime(t || time)}
-        />
+        <View style={s.dateTimeContainer}>
+          <DateTimeField
+            type="date"
+            label="Date de sortie"
+            value={date}
+            onChange={d => setDate(d || date)}
+            style={s.date}
+          />
+          <DateTimeField
+            type="time"
+            label="Heure de sortie"
+            value={time}
+            onChange={t => setTime(t || time)}
+            style={s.time}
+          />
+        </View>
         {reasonKeys.map(key => (
           <Reason key={key} onToggle={val => (reasonsMap.current[key] = val)}>
             <Text style={s.reason}>{key.replace("_", "/")}</Text>

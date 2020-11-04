@@ -4,7 +4,7 @@ import {useNavigation} from "@react-navigation/native";
 import {combineLatest} from "rxjs";
 
 import {Loader} from "./loader";
-import {profile$, isProfileValid} from "./profiles";
+import {profile$, isProfileValid} from "./profile";
 import {pdf$} from "./pdf";
 import {useTheme} from "./theme";
 

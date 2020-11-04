@@ -47,5 +47,3 @@ export const TextField: FC<TextFieldProps> = props => {
     </View>
   );
 };
-
-export default TextField;
