@@ -138,9 +138,9 @@ async function generatePdf(
   const page2 = pdfDoc.getPages()[1];
   page2.drawImage(qrImage, {
     x: 50,
-    y: page2.getHeight() - 350,
-    width: 300,
-    height: 300,
+    y: page2.getHeight() - page2.getWidth() + 50,
+    width: page2.getWidth() - 100,
+    height: page2.getWidth() - 100,
   });
 
   return await pdfDoc.saveAsBase64();
@@ -230,9 +230,10 @@ export const RenderPDFScreen: FC = () => {
           <Loader />
           <View style={s.qrcodeView}>
             <QRCode
-              ecl="M"
+              ecl="L"
               getRef={svg => svg && svg.toDataURL(qrCodeDataURLHandler)}
               value={getQRCodeData()}
+              size={512}
             />
           </View>
         </View>
