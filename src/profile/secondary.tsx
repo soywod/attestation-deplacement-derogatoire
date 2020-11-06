@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import {useNavigation, useRoute, Route} from "@react-navigation/native";
 import AsyncStorage from "@react-native-community/async-storage";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import useObservable from "@soywod/react-use-observable";
 import {BehaviorSubject} from "rxjs";
 
@@ -33,13 +34,48 @@ export const SecondaryProfilesTab: FC = () => {
   const s = StyleSheet.create({
     container: {height: "100%", backgroundColor: theme.backgroundColor},
     content: {flex: 1, padding: 10},
-    listItemView: {
-      borderBottomWidth: 1,
-      borderBottomColor: theme.fieldBorderColor,
+    profileContainer: {
+      marginVertical: 5,
+      borderRightWidth: 1,
+      borderLeftWidth: 1,
+      borderColor: theme.fieldBorderColor,
+      backgroundColor: theme.headerBackgroundColor,
+      borderRadius: 3,
+      padding: 10,
+      shadowColor: "#333333",
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.23,
+      shadowRadius: 2.62,
+      elevation: 3,
     },
-    listItemText: {
-      paddingVertical: 20,
+    profileNames: {
+      color: theme.secondaryTextColor,
+    },
+    profileTitle: {
       color: theme.primaryTextColor,
+      fontWeight: "bold",
+      fontSize: 16,
+      marginBottom: 10,
+    },
+    profileInfoContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    profileInfoIconsColumn: {
+      alignItems: "center",
+    },
+    profileInfoIconContainer: {
+      justifyContent: "center",
+      flex: 1,
+    },
+    profileInfoIcon: {
+      fontSize: 16,
+      color: theme.secondaryTextColor,
+    },
+    profileInfo: {
+      color: theme.secondaryTextColor,
+      marginLeft: 5,
+      fontSize: 14,
     },
     footer: {height: "auto", padding: 10},
   });
@@ -49,16 +85,33 @@ export const SecondaryProfilesTab: FC = () => {
       <FlatList
         data={profiles}
         renderItem={({item: profile, index}) => (
-          <View style={s.listItemView}>
-            <TouchableOpacity
-              activeOpacity={0.5}
-              delayPressIn={0}
-              delayPressOut={0}
-              onPress={() => navigation.navigate("edit-secondary-profile", {index, profile})}
-            >
-              <Text style={s.listItemText}>{profile.label}</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            delayPressIn={0}
+            delayPressOut={0}
+            onPress={() => navigation.navigate("edit-secondary-profile", {index, profile})}
+            style={s.profileContainer}
+          >
+            <Text style={s.profileTitle}>{profile.label}</Text>
+            <View style={s.profileInfoContainer}>
+              <View style={s.profileInfoIconsColumn}>
+                <View style={s.profileInfoIconContainer}>
+                  <Icon name="account" color={theme.primaryTextColor} style={s.profileInfoIcon} />
+                </View>
+                <View style={s.profileInfoIconContainer}>
+                  <Icon name="home" color={theme.primaryTextColor} style={s.profileInfoIcon} />
+                </View>
+              </View>
+              <View>
+                <Text style={s.profileInfo}>
+                  {profile.firstName} {profile.lastName}
+                </Text>
+                <Text style={s.profileInfo}>
+                  {profile.address}, {profile.city}
+                </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
         )}
         style={s.content}
         keyboardShouldPersistTaps="handled"
@@ -136,16 +189,33 @@ export const EditSecondaryProfileScreen: FC = () => {
 
     AsyncStorage.setItem("profiles", JSON.stringify(nextProfiles));
     profiles$.next(nextProfiles);
-    ToastAndroid.show("Profil secondaire modifié", ToastAndroid.SHORT);
+    ToastAndroid.show("Profil secondaire sauvegardé", ToastAndroid.SHORT);
     navigation.goBack();
   };
 
   const deleteProfile = () => {
-    const nextProfiles = profiles$.value.filter((_, index) => index !== route.index);
-    AsyncStorage.setItem("profiles", JSON.stringify(nextProfiles));
-    profiles$.next(nextProfiles);
-    ToastAndroid.show("Profil secondaire supprimé", ToastAndroid.SHORT);
-    navigation.goBack();
+    Alert.alert(
+      "Confirmation",
+      "Êtes-vous sûr de vouloir supprimer ce profil ?",
+      [
+        {
+          text: "Non",
+        },
+        {
+          text: "Oui",
+          onPress: () => {
+            const nextProfiles = profiles$.value.filter((_, index) => index !== route.index);
+            AsyncStorage.setItem("profiles", JSON.stringify(nextProfiles));
+            profiles$.next(nextProfiles);
+            ToastAndroid.show("Profil secondaire supprimé", ToastAndroid.SHORT);
+            navigation.goBack();
+          },
+        },
+      ],
+      {
+        cancelable: true,
+      },
+    );
   };
 
   return (

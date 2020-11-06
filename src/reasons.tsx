@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from "react";
+import React, {FC, useState} from "react";
 import {
   Alert,
   Button,
@@ -10,14 +10,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import {useNavigation} from "@react-navigation/native";
+import {Route, useRoute, useNavigation} from "@react-navigation/native";
 import {Picker} from "@react-native-picker/picker";
 import useObservable from "@soywod/react-use-observable";
 import {DateTime} from "luxon";
 
 import {useTheme} from "./theme";
-import {DateTimeField, DATE_FMT, TIME_FMT} from "./field/datetime";
-import {profile$, profiles$} from "./profile";
+import {DateTimeField} from "./field/datetime";
+import {profile$, profiles$, findProfileIndex} from "./profile";
+import {Certificate, emptyCert} from "./cert";
 
 export type ReasonKey =
   | "travail"
@@ -41,6 +42,8 @@ export const reasonKeys: ReasonKey[] = [
   "missions",
   "enfants",
 ];
+
+type ReasonsMap = Partial<{[key in ReasonKey]: boolean}>;
 
 const allReasons: {[key in ReasonKey]: JSX.Element} = {
   travail: (
@@ -96,16 +99,21 @@ const allReasons: {[key in ReasonKey]: JSX.Element} = {
   ),
 };
 
+type EditReasonsRouteParams = Route<"edit-reasons", {index: number; cert: Certificate}>;
+
 export const EditReasonsScreen: FC = () => {
-  const now = DateTime.local();
   const theme = useTheme();
   const navigation = useNavigation();
+  const {index: certIndex = -1, cert = emptyCert()} =
+    useRoute<EditReasonsRouteParams>().params || {};
+
   const [profiles] = useObservable(profiles$, profiles$.value);
   const [profile] = useObservable(profile$, profile$.value);
-  const [profileIndex, setProfileIndex] = useState(-1);
-  const [date, setDate] = useState(now);
-  const [time, setTime] = useState(now);
-  const reasonsMap = useRef<Partial<{[key in ReasonKey]: boolean}>>({});
+  const [profileIndex, setProfileIndex] = useState(findProfileIndex(profiles, cert.profile));
+  const [date, setDate] = useState(DateTime.fromISO(cert.leaveAt));
+  const [reasonsMap, setReasonsMap] = useState<ReasonsMap>(
+    cert.reasons.reduce((map, cert) => ({...map, [cert]: true}), {}),
+  );
 
   const s = StyleSheet.create({
     container: {height: "100%", backgroundColor: theme.backgroundColor},
@@ -143,33 +151,34 @@ export const EditReasonsScreen: FC = () => {
   });
 
   function nextStep() {
-    const reasons = reasonKeys.filter(key => reasonsMap.current[key]);
+    const reasons = reasonKeys.filter(key => reasonsMap[key]);
+    const now = DateTime.local();
+
     if (reasons.length === 0) {
       return Alert.alert("Erreur", "Vous devez choisir au moins un motif.", [{text: "OK"}], {
-        cancelable: false,
+        cancelable: true,
       });
     }
 
-    navigation.navigate("render-pdf", {
-      profile: profileIndex === -1 ? profile : profiles[profileIndex],
-      date: date.toFormat(DATE_FMT),
-      time: time.toFormat(TIME_FMT),
-      reasons,
+    navigation.reset({
+      index: 1,
+      routes: [
+        {name: "list-certs"},
+        {
+          name: "render-pdf",
+          params: {
+            index: certIndex,
+            cert: {
+              profile: profileIndex === -1 ? profile : profiles[profileIndex],
+              reasons,
+              createdAt: now.toISO(),
+              leaveAt: DateTime.max(now, date).toISO(),
+            },
+          },
+        },
+      ],
     });
   }
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("blur", () => {
-      setProfileIndex(-1);
-      setDate(now);
-      setTime(now);
-      reasonsMap.current = {};
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [navigation, now]);
 
   return (
     <View style={s.container}>
@@ -194,19 +203,31 @@ export const EditReasonsScreen: FC = () => {
             type="date"
             label="Date de sortie"
             value={date}
-            onChange={d => setDate(d || date)}
+            onChange={nextDate => {
+              if (nextDate) {
+                setDate(date.set({year: nextDate.year, month: nextDate.month, day: nextDate.day}));
+              }
+            }}
             style={s.date}
           />
           <DateTimeField
             type="time"
             label="Heure de sortie"
-            value={time}
-            onChange={t => setTime(t || time)}
+            value={date}
+            onChange={nextDate => {
+              if (nextDate) {
+                setDate(date.set({hour: nextDate.hour, minute: nextDate.minute}));
+              }
+            }}
             style={s.time}
           />
         </View>
         {reasonKeys.map(key => (
-          <Reason key={key} onToggle={val => (reasonsMap.current[key] = val)}>
+          <Reason
+            key={key}
+            isOn={Boolean(reasonsMap[key])}
+            onToggle={val => setReasonsMap(map => ({...map, [key]: val}))}
+          >
             <Text style={s.reason}>{key.replace("_", "/")}</Text>
             {" - "}
             {allReasons[key]}
@@ -221,13 +242,12 @@ export const EditReasonsScreen: FC = () => {
 };
 
 type ReasonProps = {
+  isOn: boolean;
   onToggle: (val: boolean) => void;
 };
 
-const Reason: FC<ReasonProps> = props => {
+const Reason: FC<ReasonProps> = ({isOn, onToggle: toggle, children}) => {
   const theme = useTheme();
-  const navigation = useNavigation();
-  const [isOn, toggle] = useState(false);
 
   const s = StyleSheet.create({
     view: {display: "flex", flexDirection: "row", marginBottom: 10, paddingLeft: 5},
@@ -235,20 +255,6 @@ const Reason: FC<ReasonProps> = props => {
     textView: {flex: 1, justifyContent: "center", paddingHorizontal: 10},
     text: {fontSize: 13, color: isOn ? theme.primaryTextColor : theme.switchLabelColor},
   });
-
-  useEffect(() => {
-    props.onToggle(isOn);
-  }, [isOn, props]);
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("blur", () => {
-      toggle(false);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [navigation]);
 
   function handlePress(evt: GestureResponderEvent) {
     evt.preventDefault();
@@ -265,24 +271,9 @@ const Reason: FC<ReasonProps> = props => {
           thumbColor={isOn ? theme.primaryColor : theme.switchThumbColor}
         />
       </View>
-      <TouchableOpacity activeOpacity={0.75} onPress={handlePress} style={s.textView}>
-        <Text style={s.text}>{props.children}</Text>
+      <TouchableOpacity activeOpacity={0.9} onPress={handlePress} style={s.textView}>
+        <Text style={s.text}>{children}</Text>
       </TouchableOpacity>
     </View>
-  );
-};
-
-export const EditReasonsScreenHeaderRight = () => {
-  const navigation = useNavigation();
-  const theme = useTheme();
-
-  const s = StyleSheet.create({
-    text: {padding: 10, marginRight: 5, color: theme.primaryTextColor},
-  });
-
-  return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("show-profiles")}>
-      <Text style={s.text}>Profils</Text>
-    </TouchableOpacity>
   );
 };

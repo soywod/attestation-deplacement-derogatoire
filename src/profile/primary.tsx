@@ -40,7 +40,10 @@ export const InitPrimaryProfileScreen: FC = () => {
     }
 
     AsyncStorage.setItem("profile", JSON.stringify(profile));
-    navigation.reset({index: 0, routes: [{name: "edit-reasons"}]});
+    navigation.reset({
+      index: 1,
+      routes: [{name: "list-certs"}, {name: "edit-reasons", params: {index: 0}}],
+    });
     profile$.next(nextProfile);
   }
 
@@ -95,7 +98,7 @@ export const PrimaryProfileTab: FC = () => {
     }
 
     AsyncStorage.setItem("profile", JSON.stringify(nextProfile));
-    ToastAndroid.show("Profil principal modifié", ToastAndroid.SHORT);
+    ToastAndroid.show("Profil principal sauvegardé", ToastAndroid.SHORT);
     navigation.goBack();
     profile$.next(nextProfile);
   }

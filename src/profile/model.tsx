@@ -61,3 +61,15 @@ export function isProfileValid(profile?: Profile) {
 
   return true;
 }
+
+export function findProfileIndex(profiles: Profile[], profile: Profile): number {
+  return profiles.findIndex(
+    p =>
+      p.firstName === profile.firstName &&
+      p.lastName === profile.lastName &&
+      p.dateOfBirth === profile.dateOfBirth &&
+      p.placeOfBirth === profile.placeOfBirth &&
+      p.zip === profile.zip &&
+      p.city === profile.city,
+  );
+}

@@ -54,7 +54,7 @@ export const DateTimeField: FC<DateTimeFieldProps> = props => {
   return (
     <>
       <TouchableOpacity
-        activeOpacity={0.75}
+        activeOpacity={0.9}
         onPress={() => setPickerVisible(!isPickerVisible)}
         style={props.style}
       >

@@ -5,8 +5,9 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {useTheme} from "./theme";
 import {InitScreen} from "./init";
 import {ShowProfilesScreen, InitPrimaryProfileScreen, EditSecondaryProfileScreen} from "./profile";
-import {EditReasonsScreen, EditReasonsScreenHeaderRight} from "./reasons";
-import {RenderPDFScreen, RenderPDFScreenHeaderRight} from "./pdf";
+import {EditReasonsScreen} from "./reasons";
+import {RenderPDFScreen} from "./pdf";
+import {CertListScreen, CertListHeaderRight} from "./cert";
 
 import "./error-handler";
 
@@ -27,6 +28,11 @@ const App: FC = () => {
       <Navigator initialRouteName="init">
         <Screen name="init" component={InitScreen} options={{header: () => null}} />
         <Screen
+          name="list-certs"
+          component={CertListScreen}
+          options={{...getScreenOpts("Mes attestations"), headerRight: CertListHeaderRight}}
+        />
+        <Screen
           name="show-profiles"
           component={ShowProfilesScreen}
           options={getScreenOpts("Profils", 0)}
@@ -44,15 +50,12 @@ const App: FC = () => {
         <Screen
           name="edit-reasons"
           component={EditReasonsScreen}
-          options={{
-            ...getScreenOpts("Motifs"),
-            headerRight: EditReasonsScreenHeaderRight,
-          }}
+          options={getScreenOpts("Nouvelle attestation")}
         />
         <Screen
           name="render-pdf"
           component={RenderPDFScreen}
-          options={{...getScreenOpts("Attestation"), headerRight: RenderPDFScreenHeaderRight}}
+          options={{...getScreenOpts("Attestation"), header: () => null}}
         />
       </Navigator>
     </NavigationContainer>

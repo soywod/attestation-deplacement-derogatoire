@@ -3,18 +3,17 @@ import {View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {combineLatest} from "rxjs";
 
+import {useTheme} from "./theme";
 import {Loader} from "./loader";
 import {profile$, isProfileValid} from "./profile";
-import {pdf$} from "./pdf";
-import {useTheme} from "./theme";
 
 export const InitScreen: FC = () => {
   const theme = useTheme();
   const navigation = useNavigation();
 
   useEffect(() => {
-    const sub = combineLatest(profile$, pdf$).subscribe(([profile, pdf]) => {
-      if (!profile.isReady || !pdf.isReady) {
+    const sub = combineLatest(profile$).subscribe(([profile]) => {
+      if (!profile.isReady) {
         return;
       }
 
@@ -22,14 +21,12 @@ export const InitScreen: FC = () => {
         return navigation.reset({index: 0, routes: [{name: "init-primary-profile"}]});
       }
 
-      if (pdf.isGenerated) {
-        return navigation.reset({index: 1, routes: [{name: "edit-reasons"}, {name: "render-pdf"}]});
-      }
-
-      return navigation.reset({index: 0, routes: [{name: "edit-reasons"}]});
+      return navigation.reset({index: 0, routes: [{name: "list-certs"}]});
     });
 
-    return () => sub.unsubscribe();
+    return () => {
+      sub.unsubscribe();
+    };
   }, [navigation]);
 
   return (

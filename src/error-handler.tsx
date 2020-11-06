@@ -8,6 +8,6 @@ setJSExceptionHandler((err, isFatal) => {
     [{text: "OK"}],
     {cancelable: false},
   );
-}, true);
+});
 
 setNativeExceptionHandler(err => console.error(err), true, true);
