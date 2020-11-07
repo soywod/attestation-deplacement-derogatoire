@@ -165,6 +165,7 @@ export const RenderPDFScreen: FC = () => {
             const nextCerts = certs.filter((_, index) => index !== certIndex);
             certs$.next(nextCerts);
             AsyncStorage.setItem("certs", JSON.stringify(nextCerts));
+            cert.path && RNFS.unlink(cert.path).catch();
             ToastAndroid.show("Attestation supprimée", ToastAndroid.SHORT);
             navigation.goBack();
           },
