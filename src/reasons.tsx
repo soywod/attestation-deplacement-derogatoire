@@ -110,7 +110,7 @@ export const EditReasonsScreen: FC = () => {
   const [profiles] = useObservable(profiles$, profiles$.value);
   const [profile] = useObservable(profile$, profile$.value);
   const [profileIndex, setProfileIndex] = useState(findProfileIndex(profiles, cert.profile));
-  const [date, setDate] = useState(DateTime.fromISO(cert.createdAt));
+  const [date, setDate] = useState(DateTime.fromISO(cert.leaveAt));
   const [reasonsMap, setReasonsMap] = useState<ReasonsMap>(
     cert.reasons.reduce((map, cert) => ({...map, [cert]: true}), {}),
   );
@@ -199,6 +199,7 @@ export const EditReasonsScreen: FC = () => {
             itemStyle={s.pickerItem}
             selectedValue={profileIndex}
             onValueChange={index => setProfileIndex(Number(index))}
+            dropdownIconColor={theme.primaryTextColor}
           >
             <Picker.Item label="Principal" value="-1" />
             {profiles.map((profile, index) => (

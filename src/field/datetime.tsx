@@ -16,7 +16,7 @@ import {DateTime} from "luxon";
 import {useTheme} from "../theme";
 
 export const DATE_FMT = "dd/MM/yyyy";
-export const TIME_FMT = "HH'h'mm";
+export const TIME_FMT = "HH:mm";
 
 export type DateTimeFieldProps = {
   type: "date" | "time";

@@ -12,7 +12,7 @@ export type Certificate = {
 };
 
 export const emptyCert: () => Certificate = () => {
-  const now = DateTime.local().set({second: 0, millisecond: 0}).toISO();
+  const now = DateTime.local().set({millisecond: 0}).toISO();
 
   return {
     profile: emptyPrimaryProfile(),

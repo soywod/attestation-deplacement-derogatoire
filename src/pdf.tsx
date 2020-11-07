@@ -1,14 +1,25 @@
 import React, {FC, useEffect, useState} from "react";
-import {Alert, Button, Dimensions, Platform, StyleSheet, ToastAndroid, View} from "react-native";
+import {
+  Alert,
+  Dimensions,
+  PermissionsAndroid,
+  Platform,
+  StyleSheet,
+  ToastAndroid,
+  View,
+} from "react-native";
 import Share from "react-native-share";
 import {Route, useRoute, useNavigation} from "@react-navigation/native";
 import AsyncStorage from "@react-native-community/async-storage";
 import NetInfo from "@react-native-community/netinfo";
+import {Picker} from "@react-native-picker/picker";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import RNFS from "react-native-fs";
 import QRCode from "react-native-qrcode-svg";
 import Pdf from "react-native-pdf";
 import InAppReview from "react-native-in-app-review";
 import useObservable from "@soywod/react-use-observable";
+import {Subject} from "rxjs";
 import {DateTime} from "luxon";
 import {PDFDocument, StandardFonts} from "pdf-lib";
 
@@ -16,6 +27,8 @@ import {DATE_FMT, TIME_FMT} from "./field/datetime";
 import {Loader} from "./loader";
 import {useTheme} from "./theme";
 import {Certificate, emptyCert, certs$} from "./cert";
+
+const actions$ = new Subject<string>();
 
 async function generatePdf(cert: Certificate, qrcode: string) {
   const {profile, reasons} = cert;
@@ -85,6 +98,100 @@ export const RenderPDFScreen: FC = () => {
   const [path, setPath] = useState(cert.path);
   const [isPathProceeded, processPath] = useState(false);
 
+  useEffect(() => {
+    const sub = actions$.subscribe(async action => {
+      switch (action) {
+        case "download": {
+          if (!path) {
+            return;
+          }
+
+          try {
+            const granted = await PermissionsAndroid.request(
+              PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+            );
+
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+              const date = DateTime.fromISO(cert.createdAt).toFormat("yyyy-MM-dd_HH-mm-ss");
+              const downloadPath = `${RNFS.DownloadDirectoryPath}/attestation-${date}.pdf`;
+              await RNFS.copyFile(path, downloadPath);
+              ToastAndroid.show(`Attestation téléchargée dans ${downloadPath}`, ToastAndroid.LONG);
+            }
+          } catch (err) {
+            ToastAndroid.show(err.message, ToastAndroid.LONG);
+          }
+
+          break;
+        }
+
+        case "share": {
+          Share.open({title: "Attestation de déplacement dérogatoire", url: `file://${cert.path}`});
+          break;
+        }
+
+        case "duplicate": {
+          const now = DateTime.local();
+          const leaveAt = DateTime.fromISO(cert.leaveAt).set({
+            year: now.year,
+            month: now.month,
+            day: now.day,
+          });
+
+          navigation.reset({
+            index: 1,
+            routes: [
+              {name: "list-certs"},
+              {
+                name: "edit-reasons",
+                params: {
+                  index: certs.length,
+                  cert: {
+                    ...cert,
+                    createdAt: now.toISO(),
+                    leaveAt: leaveAt.toISO(),
+                  },
+                },
+              },
+            ],
+          });
+
+          break;
+        }
+
+        case "delete": {
+          Alert.alert(
+            "Attention",
+            "Êtes-vous sûr de vouloir supprimer cette attestation ?",
+            [
+              {text: "Non"},
+              {
+                text: "Oui",
+                onPress: () => {
+                  const nextCerts = certs.filter((_, index) => index !== certIndex);
+                  certs$.next(nextCerts);
+                  AsyncStorage.setItem("certs", JSON.stringify(nextCerts));
+                  cert.path && RNFS.unlink(cert.path).catch();
+                  ToastAndroid.show("Attestation supprimée", ToastAndroid.SHORT);
+                  navigation.goBack();
+                },
+              },
+            ],
+            {cancelable: true},
+          );
+
+          break;
+        }
+
+        default:
+          break;
+      }
+    });
+
+    return () => {
+      sub.unsubscribe();
+    };
+  }, [cert, cert.createdAt, cert.path, certIndex, certs, certs.length, navigation, path]);
+
   const s = StyleSheet.create({
     container: {
       height: "100%",
@@ -92,7 +199,6 @@ export const RenderPDFScreen: FC = () => {
       alignItems: "center",
       backgroundColor: theme.backgroundColor,
     },
-    content: {flex: 1},
     qrcodeView: {
       width: 0,
       height: 0,
@@ -103,10 +209,6 @@ export const RenderPDFScreen: FC = () => {
       flex: 1,
       width: Dimensions.get("window").width,
     },
-    footer: {height: "auto", padding: 10, flexDirection: "row", backgroundColor: "#ffffff"},
-    footerLeftButton: {flex: 1, marginRight: 5},
-    footerMiddleButton: {flex: 1, marginHorizontal: 5},
-    footerRightButton: {flex: 1, marginLeft: 5},
   });
 
   function getQRCodeData() {
@@ -151,80 +253,10 @@ export const RenderPDFScreen: FC = () => {
     }
   }, [cert, certIndex, certs, isPathProceeded, path]);
 
-  function deleteCert() {
-    Alert.alert(
-      "Confirmation",
-      "Êtes-vous sûr de vouloir supprimer cette attestation ?",
-      [
-        {
-          text: "Non",
-        },
-        {
-          text: "Oui",
-          onPress: () => {
-            const nextCerts = certs.filter((_, index) => index !== certIndex);
-            certs$.next(nextCerts);
-            AsyncStorage.setItem("certs", JSON.stringify(nextCerts));
-            cert.path && RNFS.unlink(cert.path).catch();
-            ToastAndroid.show("Attestation supprimée", ToastAndroid.SHORT);
-            navigation.goBack();
-          },
-        },
-      ],
-      {
-        cancelable: true,
-      },
-    );
-  }
-
-  async function duplicateCert() {
-    const now = DateTime.local();
-    const leaveAt = DateTime.fromISO(cert.leaveAt).set({
-      year: now.year,
-      month: now.month,
-      day: now.day,
-    });
-
-    navigation.reset({
-      index: 1,
-      routes: [
-        {name: "list-certs"},
-        {
-          name: "edit-reasons",
-          params: {
-            index: certs.length,
-            cert: {
-              ...cert,
-              leaveAt: leaveAt.toISO(),
-            },
-          },
-        },
-      ],
-    });
-  }
-
-  async function shareCert() {
-    if (!cert.path) return;
-    Share.open({title: "Attestation de déplacement dérogatoire", url: `file://${cert.path}`});
-  }
-
   return (
     <View style={s.container}>
       {path ? (
-        <View style={s.content}>
-          <Pdf activityIndicator={<Loader />} source={{uri: path}} style={s.pdf} spacing={1} />
-          <View style={s.footer}>
-            <View style={s.footerLeftButton}>
-              <Button title="Supprimer" color={theme.dangerColor} onPress={deleteCert} />
-            </View>
-            <View style={s.footerMiddleButton}>
-              <Button title="Dupliquer" color={theme.secondaryColor} onPress={duplicateCert} />
-            </View>
-            <View style={s.footerRightButton}>
-              <Button title="Partager" color={theme.primaryColor} onPress={shareCert} />
-            </View>
-          </View>
-        </View>
+        <Pdf activityIndicator={<Loader />} source={{uri: path}} style={s.pdf} spacing={1} />
       ) : (
         <View>
           <Loader />
@@ -238,6 +270,56 @@ export const RenderPDFScreen: FC = () => {
           </View>
         </View>
       )}
+    </View>
+  );
+};
+
+export const RenderPDFHeaderRight = () => {
+  const theme = useTheme();
+
+  const s = StyleSheet.create({
+    container: {width: 50, height: 50},
+    picker: {
+      position: "absolute",
+      color: theme.primaryTextColor,
+      fontSize: 14,
+      width: 50,
+      height: 50,
+    },
+    pickerItem: {fontSize: 10, color: theme.primaryTextColor},
+    iconContainer: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: 50,
+      justifyContent: "center",
+      alignItems: "center",
+      height: 50,
+    },
+    icon: {
+      color: theme.primaryTextColor,
+      fontSize: 25,
+    },
+  });
+
+  return (
+    <View style={s.container}>
+      <Picker
+        mode="dialog"
+        onValueChange={action => actions$.next(action.toString())}
+        dropdownIconColor={theme.headerBackgroundColor}
+        itemStyle={s.pickerItem}
+        style={s.picker}
+      >
+        <Picker.Item label="--" value="" />
+        <Picker.Item label="Télécharger" value="download" />
+        <Picker.Item label="Partager" value="share" />
+        <Picker.Item label="Dupliquer" value="duplicate" />
+        <Picker.Item label="Supprimer" value="delete" />
+      </Picker>
+      <View style={s.iconContainer}>
+        <Icon name="dots-vertical" style={s.icon} />
+      </View>
     </View>
   );
 };

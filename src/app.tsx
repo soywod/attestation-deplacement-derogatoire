@@ -6,13 +6,14 @@ import {useTheme} from "./theme";
 import {InitScreen} from "./init";
 import {ShowProfilesScreen, InitPrimaryProfileScreen, EditSecondaryProfileScreen} from "./profile";
 import {EditReasonsScreen} from "./reasons";
-import {RenderPDFScreen} from "./pdf";
+import {RenderPDFScreen, RenderPDFHeaderRight} from "./pdf";
 import {CertListScreen, CertListHeaderRight} from "./cert";
 
 import "./error-handler";
 
 const {Screen, Navigator} = createStackNavigator();
 
+// TODO: about screen
 const App: FC = () => {
   const theme = useTheme();
 
@@ -55,7 +56,7 @@ const App: FC = () => {
         <Screen
           name="render-pdf"
           component={RenderPDFScreen}
-          options={{...getScreenOpts("Attestation"), header: () => null}}
+          options={{...getScreenOpts("Attestation"), headerRight: RenderPDFHeaderRight}}
         />
       </Navigator>
     </NavigationContainer>
