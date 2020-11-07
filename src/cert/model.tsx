@@ -11,12 +11,16 @@ export type Certificate = {
   leaveAt: string;
 };
 
-export const emptyCert: () => Certificate = () => ({
-  profile: emptyPrimaryProfile(),
-  reasons: [],
-  createdAt: DateTime.local().toISO(),
-  leaveAt: DateTime.local().toISO(),
-});
+export const emptyCert: () => Certificate = () => {
+  const now = DateTime.local().set({second: 0, millisecond: 0}).toISO();
+
+  return {
+    profile: emptyPrimaryProfile(),
+    reasons: [],
+    createdAt: now,
+    leaveAt: now,
+  };
+};
 
 export function stringifyReasons(cert: Certificate): string {
   return cert.reasons.join(", ").replace("_", "/");

@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC, useRef, useState} from "react";
 import {
   Alert,
   Button,
@@ -104,13 +104,13 @@ type EditReasonsRouteParams = Route<"edit-reasons", {index: number; cert: Certif
 export const EditReasonsScreen: FC = () => {
   const theme = useTheme();
   const navigation = useNavigation();
-  const {index: certIndex = -1, cert = emptyCert()} =
+  const emptyCertRef = useRef(emptyCert());
+  const {index: certIndex = -1, cert = emptyCertRef.current} =
     useRoute<EditReasonsRouteParams>().params || {};
-
   const [profiles] = useObservable(profiles$, profiles$.value);
   const [profile] = useObservable(profile$, profile$.value);
   const [profileIndex, setProfileIndex] = useState(findProfileIndex(profiles, cert.profile));
-  const [date, setDate] = useState(DateTime.fromISO(cert.leaveAt));
+  const [date, setDate] = useState(DateTime.fromISO(cert.createdAt));
   const [reasonsMap, setReasonsMap] = useState<ReasonsMap>(
     cert.reasons.reduce((map, cert) => ({...map, [cert]: true}), {}),
   );
@@ -152,7 +152,6 @@ export const EditReasonsScreen: FC = () => {
 
   function nextStep() {
     const reasons = reasonKeys.filter(key => reasonsMap[key]);
-    const now = DateTime.local();
 
     if (reasons.length === 0) {
       return Alert.alert("Erreur", "Vous devez choisir au moins un motif.", [{text: "OK"}], {
@@ -160,24 +159,33 @@ export const EditReasonsScreen: FC = () => {
       });
     }
 
-    navigation.reset({
-      index: 1,
-      routes: [
-        {name: "list-certs"},
-        {
-          name: "render-pdf",
-          params: {
-            index: certIndex,
-            cert: {
-              profile: profileIndex === -1 ? profile : profiles[profileIndex],
-              reasons,
-              createdAt: now.toISO(),
-              leaveAt: DateTime.max(now, date).toISO(),
-            },
-          },
-        },
-      ],
-    });
+    function navigateToNextStep() {
+      const nextCert = {
+        profile: profileIndex === -1 ? profile : profiles[profileIndex],
+        reasons,
+        createdAt: cert.createdAt,
+        leaveAt: date.toISO(),
+      };
+
+      navigation.reset({
+        index: 1,
+        routes: [
+          {name: "list-certs"},
+          {name: "render-pdf", params: {index: certIndex, cert: nextCert}},
+        ],
+      });
+    }
+
+    if (date < DateTime.fromISO(cert.createdAt)) {
+      return Alert.alert(
+        "Attention",
+        "La date de sortie est inférieure à la date de création. Cela peut poser problème lors d'un contrôle. Continuer ?",
+        [{text: "Non"}, {text: "Oui", onPress: navigateToNextStep}],
+        {cancelable: true},
+      );
+    }
+
+    navigateToNextStep();
   }
 
   return (
