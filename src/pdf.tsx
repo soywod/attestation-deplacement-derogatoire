@@ -115,7 +115,15 @@ export const RenderPDFScreen: FC = () => {
               const date = DateTime.fromISO(cert.createdAt).toFormat("yyyy-MM-dd_HH-mm-ss");
               const downloadPath = `${RNFS.DownloadDirectoryPath}/attestation-${date}.pdf`;
               await RNFS.copyFile(path, downloadPath);
-              ToastAndroid.show(`Attestation téléchargée dans ${downloadPath}`, ToastAndroid.LONG);
+              Alert.alert(
+                "Téléchargement réussi",
+                "Attestation téléchargée dans le dossier de téléchargement par défaut de votre téléphone.\n\n" +
+                  downloadPath,
+                [{text: "OK"}],
+                {cancelable: true},
+              );
+            } else {
+              ToastAndroid.show("Permission refusée", ToastAndroid.SHORT);
             }
           } catch (err) {
             ToastAndroid.show(err.message, ToastAndroid.LONG);
@@ -281,12 +289,9 @@ export const RenderPDFHeaderRight = () => {
     container: {width: 50, height: 50},
     picker: {
       position: "absolute",
-      color: theme.primaryTextColor,
-      fontSize: 14,
       width: 50,
       height: 50,
     },
-    pickerItem: {fontSize: 10, color: theme.primaryTextColor},
     iconContainer: {
       position: "absolute",
       top: 0,
@@ -306,12 +311,14 @@ export const RenderPDFHeaderRight = () => {
     <View style={s.container}>
       <Picker
         mode="dialog"
+        prompt="Actions possibles :"
+        selectedValue=""
         onValueChange={action => actions$.next(action.toString())}
         dropdownIconColor={theme.headerBackgroundColor}
-        itemStyle={s.pickerItem}
+        onResponderStart={console.log}
         style={s.picker}
       >
-        <Picker.Item label="--" value="" />
+        <Picker.Item label="" value="" />
         <Picker.Item label="Télécharger" value="download" />
         <Picker.Item label="Partager" value="share" />
         <Picker.Item label="Dupliquer" value="duplicate" />
