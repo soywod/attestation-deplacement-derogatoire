@@ -315,7 +315,6 @@ export const RenderPDFHeaderRight = () => {
         selectedValue=""
         onValueChange={action => actions$.next(action.toString())}
         dropdownIconColor={theme.headerBackgroundColor}
-        onResponderStart={console.log}
         style={s.picker}
       >
         <Picker.Item label="" value="" />
