@@ -14,7 +14,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import {Picker} from "@react-native-picker/picker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import RNFS from "react-native-fs";
-import GooglePlayAvailability from "react-native-google-api-availability-bridge";
+/* import GooglePlayAvailability from "react-native-google-api-availability-bridge"; */
 import QRCode from "react-native-qrcode-svg";
 import Pdf from "react-native-pdf";
 import InAppReview from "react-native-in-app-review";
@@ -254,21 +254,24 @@ export const RenderPDFScreen: FC = () => {
       processPath(true);
 
       try {
-        GooglePlayAvailability.checkGooglePlayServices((status: string) => {
-          switch (status) {
-            case "success":
-            case "update": {
-              if (InAppReview.isAvailable()) {
-                InAppReview.RequestInAppReview();
-              }
+        if (InAppReview.isAvailable()) {
+          InAppReview.RequestInAppReview();
+        }
+        /* GooglePlayAvailability.checkGooglePlayServices((status: string) => { */
+        /*   switch (status) { */
+        /*     case "success": */
+        /*     case "update": { */
+        /*       if (InAppReview.isAvailable()) { */
+        /*         InAppReview.RequestInAppReview(); */
+        /*       } */
 
-              break;
-            }
+        /*       break; */
+        /*     } */
 
-            default:
-              break;
-          }
-        });
+        /*     default: */
+        /*       break; */
+        /*   } */
+        /* }); */
       } catch (err) {
         //
       }
