@@ -33,7 +33,7 @@ export const SecondaryProfilesTab: FC = () => {
 
   const s = StyleSheet.create({
     container: {height: "100%", backgroundColor: theme.backgroundColor},
-    content: {flex: 1, padding: 10},
+    content: {flex: 1, padding: 10, paddingTop: 15},
     profileContainer: {
       marginBottom: 10,
       borderWidth: 1,

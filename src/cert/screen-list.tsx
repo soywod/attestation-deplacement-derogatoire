@@ -1,6 +1,17 @@
 import React, {FC} from "react";
-import {Button, FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {
+  Alert,
+  Button,
+  FlatList,
+  StyleSheet,
+  Text,
+  ToastAndroid,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import RNFS from "react-native-fs";
 import {useNavigation} from "@react-navigation/native";
 import useObservable from "@soywod/react-use-observable";
 import {DateTime} from "luxon";
@@ -8,7 +19,7 @@ import {DateTime} from "luxon";
 import {useTheme} from "../theme";
 import {DATE_FMT, TIME_FMT} from "../field/datetime";
 import {isPrimaryProfile} from "../profile";
-import {certs$, stringifyReasons} from ".";
+import {Certificate, certs$, stringifyReasons} from ".";
 
 export const CertListScreen: FC = () => {
   const navigation = useNavigation();
@@ -17,7 +28,7 @@ export const CertListScreen: FC = () => {
 
   const s = StyleSheet.create({
     container: {height: "100%", backgroundColor: theme.backgroundColor},
-    content: {flex: 1, padding: 10},
+    content: {flex: 1, padding: 10, paddingTop: 15},
     certContainer: {
       marginBottom: 10,
       borderWidth: 1,
@@ -27,12 +38,19 @@ export const CertListScreen: FC = () => {
       padding: 10,
       elevation: 2,
     },
+    certTitleContainer: {
+      flexDirection: "row",
+    },
     certTitle: {
       color: theme.primaryTextColor,
+      flex: 1,
       fontWeight: "bold",
       textTransform: "capitalize",
       fontSize: 16,
       marginBottom: 10,
+    },
+    certTitleIcon: {
+      fontSize: 22,
     },
     certInfoContainer: {
       flexDirection: "row",
@@ -57,6 +75,27 @@ export const CertListScreen: FC = () => {
     footer: {height: "auto", padding: 10},
   });
 
+  const deleteCert = (cert: Certificate, certIndex: number) => () => {
+    Alert.alert(
+      "Attention",
+      "Êtes-vous sûr de vouloir supprimer cette attestation ?",
+      [
+        {text: "Non"},
+        {
+          text: "Oui",
+          onPress: () => {
+            const nextCerts = certs.filter((_, index) => index !== certIndex);
+            certs$.next(nextCerts);
+            AsyncStorage.setItem("certs", JSON.stringify(nextCerts));
+            cert.path && RNFS.unlink(cert.path).catch();
+            ToastAndroid.show("Attestation supprimée", ToastAndroid.SHORT);
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+
   return (
     <View style={s.container}>
       <FlatList
@@ -67,9 +106,20 @@ export const CertListScreen: FC = () => {
             delayPressIn={0}
             delayPressOut={0}
             onPress={() => navigation.navigate("render-pdf", {index, cert})}
+            onLongPress={deleteCert(cert, index)}
             style={s.certContainer}
           >
-            <Text style={s.certTitle}>{stringifyReasons(cert)}</Text>
+            <View style={s.certTitleContainer}>
+              <Text style={s.certTitle}>{stringifyReasons(cert)}</Text>
+              <TouchableOpacity
+                activeOpacity={0.9}
+                delayPressIn={0}
+                delayPressOut={0}
+                onPress={deleteCert(cert, index)}
+              >
+                <Icon name="close" color={theme.dangerColor} style={s.certTitleIcon} />
+              </TouchableOpacity>
+            </View>
             <View style={s.certInfoContainer}>
               <View style={s.certInfoIconsColumn}>
                 <View style={s.certInfoIconContainer}>
