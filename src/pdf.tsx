@@ -11,10 +11,10 @@ import {
 import Share from "react-native-share";
 import {Route, useRoute, useNavigation} from "@react-navigation/native";
 import AsyncStorage from "@react-native-community/async-storage";
-import NetInfo from "@react-native-community/netinfo";
 import {Picker} from "@react-native-picker/picker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import RNFS from "react-native-fs";
+import GooglePlayAvailability from "react-native-google-api-availability-bridge";
 import QRCode from "react-native-qrcode-svg";
 import Pdf from "react-native-pdf";
 import InAppReview from "react-native-in-app-review";
@@ -253,11 +253,25 @@ export const RenderPDFScreen: FC = () => {
       AsyncStorage.setItem("certs", JSON.stringify(certs));
       processPath(true);
 
-      NetInfo.fetch().then(state => {
-        if (state.isConnected && InAppReview.isAvailable()) {
-          InAppReview.RequestInAppReview();
-        }
-      });
+      try {
+        GooglePlayAvailability.checkGooglePlayServices((status: string) => {
+          switch (status) {
+            case "success":
+            case "update": {
+              if (InAppReview.isAvailable()) {
+                InAppReview.RequestInAppReview();
+              }
+
+              break;
+            }
+
+            default:
+              break;
+          }
+        });
+      } catch (err) {
+        //
+      }
     }
   }, [cert, certIndex, certs, isPathProceeded, path]);
 
