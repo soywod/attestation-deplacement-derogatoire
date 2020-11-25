@@ -47,33 +47,33 @@ async function generatePdf(cert: Certificate, qrcode: string) {
     page1.drawText(text, {x, y, size, font});
   };
 
-  drawText(`${firstName} ${lastName}`, 135, 696);
-  drawText(DateTime.fromISO(dateOfBirth).toFormat(DATE_FMT), 135, 674);
-  drawText(placeOfBirth, 320, 674);
-  drawText(`${address}, ${zip} ${city}`, 135, 652);
+  drawText(`${firstName} ${lastName}`, 107, 657);
+  drawText(DateTime.fromISO(dateOfBirth).toFormat(DATE_FMT), 107, 627);
+  drawText(placeOfBirth, 240, 627);
+  drawText(`${address}, ${zip} ${city}`, 124, 596);
 
-  reasons.includes("travail") && drawText("×", 77, 577, 20);
-  reasons.includes("achats") && drawText("×", 77, 532, 20);
-  reasons.includes("sante") && drawText("×", 77, 476, 20);
-  reasons.includes("famille") && drawText("×", 77, 435, 20);
-  reasons.includes("handicap") && drawText("×", 77, 394, 20);
-  reasons.includes("sport_animaux") && drawText("×", 77, 356, 20);
-  reasons.includes("convocation") && drawText("×", 77, 293, 20);
-  reasons.includes("missions") && drawText("×", 77, 254, 20);
-  reasons.includes("enfants") && drawText("×", 77, 209, 20);
+  reasons.includes("travail") && drawText("×", 57, 486, 20);
+  reasons.includes("achats") && drawText("×", 57, 415, 20);
+  reasons.includes("sante") && drawText("×", 57, 370, 20);
+  reasons.includes("famille") && drawText("×", 57, 348, 20);
+  reasons.includes("handicap") && drawText("×", 57, 315, 20);
+  reasons.includes("sport_animaux") && drawText("×", 57, 292, 20);
+  reasons.includes("convocation") && drawText("×", 57, 210, 20);
+  reasons.includes("missions") && drawText("×", 57, 177, 20);
+  reasons.includes("enfants") && drawText("×", 57, 155, 20);
 
-  drawText(city, 111, 175);
-  drawText(date, 111, 153);
-  drawText(time, 275, 153);
-  drawText(`${firstName} ${lastName}`, 130, 119);
+  drawText(city, 93, 122);
+  drawText(date, 76, 92);
+  drawText(time, 246, 92);
+  drawText(`${firstName} ${lastName}`, 120, 35);
 
   const qrImage = await pdfDoc.embedPng(qrcode);
 
   page1.drawImage(qrImage, {
-    x: page1.getWidth() - 160,
-    y: 115,
-    width: 80,
-    height: 80,
+    x: page1.getWidth() - 140,
+    y: 25,
+    width: 120,
+    height: 120,
   });
 
   pdfDoc.addPage();
