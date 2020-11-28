@@ -170,12 +170,18 @@ export const CertListHeaderRight = () => {
   const theme = useTheme();
 
   const s = StyleSheet.create({
+    container: {flexDirection: "row"},
     text: {padding: 10, marginRight: 5, color: theme.primaryTextColor},
   });
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("show-profiles")}>
-      <Text style={s.text}>Profils</Text>
-    </TouchableOpacity>
+    <View style={s.container}>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("show-about")}>
+        <Text style={s.text}>À propos</Text>
+      </TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => navigation.navigate("show-profiles")}>
+        <Text style={s.text}>Profils</Text>
+      </TouchableOpacity>
+    </View>
   );
 };

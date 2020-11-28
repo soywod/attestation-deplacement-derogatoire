@@ -8,6 +8,7 @@ import {ShowProfilesScreen, InitPrimaryProfileScreen, EditSecondaryProfileScreen
 import {EditReasonsScreen} from "./reasons";
 import {RenderPDFScreen, RenderPDFHeaderRight} from "./pdf";
 import {CertListScreen, CertListHeaderRight} from "./cert";
+import {ShowAboutScreen, AboutHeaderRight} from "./about";
 
 import "./error-handler";
 
@@ -32,6 +33,11 @@ const App: FC = () => {
           name="list-certs"
           component={CertListScreen}
           options={{...getScreenOpts("Mes attestations"), headerRight: CertListHeaderRight}}
+        />
+        <Screen
+          name="show-about"
+          component={ShowAboutScreen}
+          options={{...getScreenOpts("À propos"), headerRight: AboutHeaderRight}}
         />
         <Screen
           name="show-profiles"
