@@ -3,7 +3,7 @@
   "description": "Application mobile de génération d'attestation de déplacement dérogatoire.",
   "author": "soywod <clement.douin@posteo.net>",
   "license": "MIT",
-  "version": "2.4.1",
+  "version": "3.0.0",
   "private": true,
   "keywords": [
     "attestation",

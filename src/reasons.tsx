@@ -22,25 +22,23 @@ import {Certificate, emptyCert} from "./cert";
 
 export type ReasonKey =
   | "travail"
-  | "achats"
   | "sante"
   | "famille"
   | "handicap"
-  | "sport_animaux"
   | "convocation"
   | "missions"
-  | "enfants";
+  | "transits"
+  | "animaux";
 
 export const reasonKeys: ReasonKey[] = [
   "travail",
-  "achats",
   "sante",
   "famille",
   "handicap",
-  "sport_animaux",
   "convocation",
   "missions",
-  "enfants",
+  "transits",
+  "animaux",
 ];
 
 type ReasonsMap = Partial<{[key in ReasonKey]: boolean}>;
@@ -48,56 +46,44 @@ type ReasonsMap = Partial<{[key in ReasonKey]: boolean}>;
 const allReasons: {[key in ReasonKey]: JSX.Element} = {
   travail: (
     <Text>
-      Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un
-      établissement d’enseignement ou de formation ; déplacements professionnels ne pouvant être
-      différés ; déplacements pour un concours ou un examen.
-    </Text>
-  ),
-  achats: (
-    <Text>
-      Déplacements pour se rendre dans un établissement culturel autorisé ou un lieu de culte ;
-      déplacements pour effectuer des achats de biens, pour des services dont la fourniture est
-      autorisée, pour les retraits de commandes et les livraisons à domicile.
+      Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou le lieu
+      d’enseignement et de formation, déplacements professionnels ne pouvant être différés.
     </Text>
   ),
   sante: (
     <Text>
-      Consultations, examens et soins ne pouvant être assurés à distance et l’achat de médicaments.
+      Déplacements pour des consultations et soins ne pouvant être assurés à distance et ne pouvant
+      être différés ou pour l’achat de produits de santé.
     </Text>
   ),
   famille: (
     <Text>
-      Déplacements pour motif familial impérieux, pour l'assistance aux personnes vulnérables et
-      précaires ou la garde d'enfants.
+      Déplacements pour motif familial impérieux, pour l’assistance aux personnes vulnérables ou
+      précaires ou pour la garde d’enfants.
     </Text>
   ),
-  handicap: <Text>Déplacements des personnes en situation de handicap et leur accompagnant.</Text>,
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  sport_animaux: (
-    <Text>
-      Déplacements en plein air ou vers un lieu de plein air, sans changement du lieu de résidence,
-      dans la limite de trois heures quotidiennes et dans un rayon maximal de vingt kilomètres
-      autour du domicile, liés soit à l’activité physique ou aux loisirs individuels, à l’exclusion
-      de toute pratique sportive collective et de toute proximité avec d’autres personnes, soit à la
-      promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des
-      animaux de compagnie.
-    </Text>
+  handicap: (
+    <Text>Déplacements des personnes en situation de handicap et de leur accompagnant.</Text>
   ),
   convocation: (
-    <>
-      Convocations judiciaires ou administratives et déplacements pour se rendre dans un service
-      public.
-    </>
+    <Text>Déplacements pour répondre à une convocation judiciaire ou administrative</Text>
   ),
   missions: (
     <Text>
-      Participation à des missions d'intérêt général sur demande de l'autorité administrative.
+      Déplacements pour participer à des missions d’intérêt général sur demande de l’autorité
+      administrative.
     </Text>
   ),
-  enfants: (
+  transits: (
     <Text>
-      Déplacements pour chercher les enfants à l’école et à l’occasion de leurs activités
-      périscolaires.
+      Déplacements liés à des transits ferroviaires ou aériens pour des déplacements de longues
+      distances.
+    </Text>
+  ),
+  animaux: (
+    <Text>
+      Déplacements brefs, dans un rayon maximal d’un kilomètre autour du domicile pour les besoins
+      des animaux de compagnie.
     </Text>
   ),
 };

@@ -47,33 +47,32 @@ async function generatePdf(cert: Certificate, qrcode: string) {
     page1.drawText(text, {x, y, size, font});
   };
 
-  drawText(`${firstName} ${lastName}`, 107, 657);
-  drawText(DateTime.fromISO(dateOfBirth).toFormat(DATE_FMT), 107, 627);
-  drawText(placeOfBirth, 240, 627);
-  drawText(`${address}, ${zip} ${city}`, 124, 596);
+  drawText(`${firstName} ${lastName}`, 107, 627);
+  drawText(DateTime.fromISO(dateOfBirth).toFormat(DATE_FMT), 107, 596);
+  drawText(placeOfBirth, 240, 596);
+  drawText(`${address}, ${zip} ${city}`, 124, 566);
 
-  reasons.includes("travail") && drawText("×", 57, 486, 20);
-  reasons.includes("achats") && drawText("×", 57, 415, 20);
-  reasons.includes("sante") && drawText("×", 57, 370, 20);
-  reasons.includes("famille") && drawText("×", 57, 348, 20);
-  reasons.includes("handicap") && drawText("×", 57, 315, 20);
-  reasons.includes("sport_animaux") && drawText("×", 57, 292, 20);
-  reasons.includes("convocation") && drawText("×", 57, 210, 20);
-  reasons.includes("missions") && drawText("×", 57, 177, 20);
-  reasons.includes("enfants") && drawText("×", 57, 155, 20);
+  reasons.includes("travail") && drawText("×", 57, 450, 20);
+  reasons.includes("sante") && drawText("×", 57, 415, 20);
+  reasons.includes("famille") && drawText("×", 57, 380, 20);
+  reasons.includes("handicap") && drawText("×", 57, 348, 20);
+  reasons.includes("convocation") && drawText("×", 57, 325, 20);
+  reasons.includes("missions") && drawText("×", 57, 304, 20);
+  reasons.includes("transits") && drawText("×", 57, 270, 20);
+  reasons.includes("animaux") && drawText("×", 57, 238, 20);
 
-  drawText(city, 93, 122);
-  drawText(date, 76, 92);
-  drawText(time, 246, 92);
-  drawText(`${firstName} ${lastName}`, 120, 35);
+  drawText(city, 93, 185);
+  drawText(date, 76, 155);
+  drawText(time, 246, 155);
+  drawText(`${firstName} ${lastName}`, 120, 100);
 
   const qrImage = await pdfDoc.embedPng(qrcode);
 
   page1.drawImage(qrImage, {
-    x: page1.getWidth() - 140,
-    y: 25,
-    width: 120,
-    height: 120,
+    x: page1.getWidth() - 150,
+    y: 84,
+    width: 70,
+    height: 70,
   });
 
   pdfDoc.addPage();
